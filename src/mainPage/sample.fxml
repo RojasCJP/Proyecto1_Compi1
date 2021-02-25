@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-
-<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="mainPage.Controller">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPage.Controller">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -23,39 +12,33 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="698.0" prefWidth="1083.0">
+      <AnchorPane onMouseMoved="#inicializar" prefHeight="698.0" prefWidth="1083.0">
          <children>
-            <MenuButton layoutX="36.0" layoutY="36.0" mnemonicParsing="false" text="Archivo">
+            <MenuButton fx:id="MenuArchivo" layoutX="36.0" layoutY="36.0" mnemonicParsing="false" text="Archivo">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
               </items>
             </MenuButton>
             <Label layoutX="36.0" layoutY="123.0" text="Archivo de Entrada" />
-            <TextArea layoutX="36.0" layoutY="140.0" prefHeight="197.0" prefWidth="300.0" />
-            <Button layoutX="36.0" layoutY="379.0" mnemonicParsing="false" text="Generar Automata" />
-            <Button layoutX="160.0" layoutY="379.0" mnemonicParsing="false" text="Analizar Entradas" />
-            <TreeTableView layoutX="357.0" layoutY="12.0" prefHeight="395.0" prefWidth="200.0">
-              <columns>
-                <TreeTableColumn prefWidth="75.0" />
-                <TreeTableColumn prefWidth="75.0" />
-              </columns>
-            </TreeTableView>
-            <MenuButton layoutX="590.0" layoutY="36.0" mnemonicParsing="false" text="Ver imagenes">
+            <TextArea fx:id="Entrada" layoutX="36.0" layoutY="140.0" prefHeight="197.0" prefWidth="300.0" />
+            <Button layoutX="36.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#generarAutomata" text="Generar Automata" />
+            <Button layoutX="160.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#analizarEntradas" text="Analizar Entradas" />
+            <MenuButton fx:id="MenuImagen" layoutX="590.0" layoutY="36.0" mnemonicParsing="false" text="Ver imagenes">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
               </items>
             </MenuButton>
-            <ImageView fitHeight="238.0" fitWidth="453.0" layoutX="590.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imagenes" fitHeight="238.0" fitWidth="453.0" layoutX="590.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../imagenes/prueba.jpg" />
-               </image>
-            </ImageView>
-            <Button layoutX="590.0" layoutY="379.0" mnemonicParsing="false" text="Anterior" />
-            <Button layoutX="972.0" layoutY="379.0" mnemonicParsing="false" text="Siguiente" />
+                  <Image url="@../Imagenes/prueba.jpg" />
+               </image></ImageView>
+            <Button layoutX="590.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#imagenAnterior" text="Anterior" />
+            <Button layoutX="972.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#imagenSiguiente" text="Siguiente" />
             <Label layoutX="36.0" layoutY="426.0" text="Salida" />
-            <TextArea layoutX="36.0" layoutY="454.0" prefHeight="200.0" prefWidth="1002.0" />
+            <TextArea fx:id="Salida" layoutX="36.0" layoutY="454.0" prefHeight="200.0" prefWidth="1002.0" />
+            <TreeView fx:id="Archivos" layoutX="354.0" layoutY="32.0" prefHeight="393.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
    </children>

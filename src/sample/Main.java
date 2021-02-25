@@ -11,7 +11,7 @@ import javafx.stage.Stage;
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../mainPage/sample.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("REGEXIVE");
         primaryStage.setScene(new Scene(root, 1100, 700));
         primaryStage.show();
     }
