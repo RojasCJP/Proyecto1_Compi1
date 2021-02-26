@@ -1,11 +1,21 @@
 package mainPage;
 
+import Analizadores.Analizadores;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.lang.reflect.Field;
+import java.util.Scanner;
+
 
 
 public class Controller {
@@ -22,83 +32,120 @@ public class Controller {
     @FXML
     private TextArea   Salida;
 
-    private boolean  menus        = false;
-    private boolean  tree         = false;
-    private MenuItem abrir        = new MenuItem("Abrir");
-    private MenuItem guardar      = new MenuItem("Guardar");
-    private MenuItem guardarComo  = new MenuItem("Guardar Como...");
-    private MenuItem generar      = new MenuItem("Generar XML de Salida");
-    private MenuItem arboles      = new MenuItem("Arboles");
-    private MenuItem siguientes   = new MenuItem("Siguientes");
-    private MenuItem transiciones = new MenuItem("Transiciones");
-    private MenuItem automatas    = new MenuItem("Automatas");
-
+    private static boolean     menus = false;
+    private static boolean     tree  = false;
+    private        FileChooser fileChooser;
+    private        Stage       stage;
 
     @FXML
     public void inicializar(MouseEvent event) {
-        agregarMenus();
         mostrarTreeView();
+        this.stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     }
 
     @FXML
-    public void analizarEntradas(MouseEvent event){
-        String textoEntrada = this.Entrada.getText();
+    public void analizarEntradas(MouseEvent event) {
+        String textoEntrada = "Analisis Lexico:\n\n\nAnalisis Sintactico:";
+        Analizadores.lexer();
         this.Salida.setText(textoEntrada);
     }
 
     @FXML
-    public void generarAutomata(MouseEvent event){
+    public void generarAutomata(MouseEvent event) {
         this.Salida.setText("se esta generando su automata");
     }
 
     @FXML
-    public void imagenAnterior(MouseEvent event){
+    public void imagenAnterior(MouseEvent event) {
         this.Salida.setText("pasa a la imagen anterior");
     }
 
     @FXML
-    public void imagenSiguiente(MouseEvent event){
+    public void imagenSiguiente(MouseEvent event) {
         this.Salida.setText("pasa a la siguiente imagen");
     }
 
-    private void agregarMenus() {
-        if (this.menus == false) {
-            this.MenuArchivo.getItems().remove(0, 2);
-            this.MenuImagen.getItems().remove(0, 2);
-            this.MenuArchivo.getItems().addAll(abrir, guardar, guardarComo, generar);
-            this.MenuImagen.getItems().addAll(arboles, siguientes, transiciones, automatas);
-            this.menus = true;
+    @FXML
+    private void abrirMethod(ActionEvent event) {
+        String data = "";
+        try {
+            fileChooser = new FileChooser();
+            fileChooser.setTitle("Abrir documento");
+            File    selectedFile = fileChooser.showOpenDialog(this.stage);
+            Scanner fileScanner  = new Scanner(selectedFile);
+            while (fileScanner.hasNextLine()) {
+                data += fileScanner.nextLine() + "\n";
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+        Entrada.setText(data);
+
+    }
+
+    @FXML
+    private void guardarMethod(ActionEvent event) {
+        //todo tego que hacer el metodo para ver si ya existia el archivo y guardarlo
+    }
+
+    @FXML
+    private void guardarComoMethod(ActionEvent event) {
+        //todo tengo hacer que pueda guardar el archivo en algun folder
+    }
+
+    @FXML
+    private void generarMethod(ActionEvent event) {
+        //todo tengo que genererar el archivo json en la carpeta ../Imagenes/Salida
     }
 
     private void mostrarTreeView() {
         if (this.tree == false) {
-            TreeItem root               = new TreeItem("Imagenes");
-            TreeItem arboles            = new TreeItem("Arboles");
-            TreeItem automatas          = new TreeItem("Automatas");
-            TreeItem siguientes         = new TreeItem("Tabla de Siguientes");
-            TreeItem transiciones       = new TreeItem("Tabla de Transiciones");
-            File     arbolesFolder      = new File("src/Imagenes/Arboles");
-            File     automatasFolder    = new File("src/Imagenes/Automatas");
-            File     siguientesFolder   = new File("src/Imagenes/Tabla de Siguientes");
-            File     transicionesFolder = new File("src/Imagenes/Tabla de Transiciones");
-            File[]   listaArboles       = arbolesFolder.listFiles();
-            File[]   listaAutomatas     = automatasFolder.listFiles();
-            File[]   listaSiguientes    = siguientesFolder.listFiles();
-            File[]   listaTransiciones  = transicionesFolder.listFiles();
+            TreeItem root         = new TreeItem("FOLDERS");
+            TreeItem arboles      = new TreeItem("ARBOLES");
+            TreeItem afnd         = new TreeItem("AFND");
+            TreeItem siguientes   = new TreeItem("SIGUIENTES");
+            TreeItem transiciones = new TreeItem("TRANSICIONES");
+            TreeItem afd          = new TreeItem("AFD");
+            TreeItem errores      = new TreeItem("ERRORES");
+            TreeItem salidas      = new TreeItem("SALIDAS");
+
+            File arbolesFolder      = new File("src/Imagenes/ARBOLES_201900289");
+            File afndFolder         = new File("src/Imagenes/AFND_201900289");
+            File siguientesFolder   = new File("src/Imagenes/SIGUIENTES_201900289");
+            File transicionesFolder = new File("src/Imagenes/TRANSICIONES_201900289");
+            File afdFolder          = new File("src/Imagenes/AFD_201900289");
+            File erroresFolder      = new File("src/Imagenes/ERRORES_201900289");
+            File salidasFolder      = new File("src/Imagenes/SALIDAS_201900289");
+
+            File[] listaArboles      = arbolesFolder.listFiles();
+            File[] listaAfnd         = afndFolder.listFiles();
+            File[] listaSiguientes   = siguientesFolder.listFiles();
+            File[] listaTransiciones = transicionesFolder.listFiles();
+            File[] listaAfd          = afdFolder.listFiles();
+            File[] listaErrores      = erroresFolder.listFiles();
+            File[] listaSalidas      = salidasFolder.listFiles();
 
             setChilds(listaArboles, arboles);
-            setChilds(listaAutomatas, automatas);
+            setChilds(listaAfnd, afnd);
             setChilds(listaSiguientes, siguientes);
             setChilds(listaTransiciones, transiciones);
+            setChilds(listaAfd, afd);
+            setChilds(listaErrores, errores);
+            setChilds(listaSalidas, salidas);
+
 
             root.setExpanded(true);
             arboles.setExpanded(true);
-            automatas.setExpanded(true);
+            afnd.setExpanded(true);
             siguientes.setExpanded(true);
             transiciones.setExpanded(true);
+            afd.setExpanded(true);
+            errores.setExpanded(true);
+            salidas.setExpanded(true);
+
+
             this.Archivos.setRoot(root);
-            root.getChildren().addAll(arboles, automatas, siguientes, transiciones);
+            root.getChildren().addAll(arboles, afnd, siguientes, transiciones, afd, errores, salidas);
             //todo tengo que hacer que muestre los archivos y no nombres que yo queme, para eso tengo que ver manejo de archivos creo
             this.tree = true;
 
@@ -107,10 +154,13 @@ public class Controller {
     }
 
     private void setChilds(File[] lista, TreeItem item) {
-        for (int i = 0; i < lista.length; i++) {
-            TreeItem child = new TreeItem(lista[i].getName());
-            item.getChildren().add(child);
+        if (lista != null) {
+            for (int i = 0; i < lista.length; i++) {
+                TreeItem child = new TreeItem(lista[i].getName());
+                item.getChildren().add(child);
+            }
         }
+
     }
 
 }

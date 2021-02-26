@@ -16,8 +16,10 @@
          <children>
             <MenuButton fx:id="MenuArchivo" layoutX="36.0" layoutY="36.0" mnemonicParsing="false" text="Archivo">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
+                <MenuItem mnemonicParsing="false" onAction="#abrirMethod" text="Abrir" />
+                <MenuItem mnemonicParsing="false" onAction="#guardarMethod" text="Guardar" />
+                  <MenuItem mnemonicParsing="false" onAction="#guardarComoMethod" text="Guardar Como" />
+                  <MenuItem mnemonicParsing="false" onAction="#generarMethod" text="Generar" />
               </items>
             </MenuButton>
             <Label layoutX="36.0" layoutY="123.0" text="Archivo de Entrada" />
@@ -26,8 +28,11 @@
             <Button layoutX="160.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#analizarEntradas" text="Analizar Entradas" />
             <MenuButton fx:id="MenuImagen" layoutX="590.0" layoutY="36.0" mnemonicParsing="false" text="Ver imagenes">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
+                <MenuItem mnemonicParsing="false" text="Arboles" />
+                <MenuItem mnemonicParsing="false" text="AFND" />
+                  <MenuItem mnemonicParsing="false" text="Siguientes" />
+                  <MenuItem mnemonicParsing="false" text="Transiciones" />
+                  <MenuItem mnemonicParsing="false" text="AFD" />
               </items>
             </MenuButton>
             <ImageView fx:id="imagenes" fitHeight="238.0" fitWidth="453.0" layoutX="590.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
