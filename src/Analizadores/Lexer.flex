@@ -10,27 +10,27 @@ espacio=[ ,\t,\r,\n]+
     public String lexeme;
 %}
 %%
-CONJ|
-while {lexeme=yytext(); return Reservadas;}
+(CONJ) {lexeme=yytext(); return CONJ;}
 {espacio} {/*Ignore*/}
 "//".* {/*Ignore*/}
-"{" {return Llave_Abre;}
-"}" {return Llave_Cierra;}
-"-" {return Guion;}
-"~" {return Guion;}
-"." {return Punto;}
-"," {return Coma;}
-";" {return Punto_Coma;}
-"|" {return Or;}
-"*" {return Asterizco;}
-"+" {return Suma;}
-"?" {return Interogacion;}
-"<!" {return Comentario_Multi_Abre;}
-"!>" {return Comentario_Multi_Cierra;}
-"%" {return Porcentaje;}
-"\n" {return Linea;}
-"'" {return Comilla;}
-"\"" {return Doble_Comilla;}
+("{") {lexeme=yytext(); return Llave_Abre;}
+("}") {lexeme=yytext(); return Llave_Cierra;}
+((.)"-"(.)) {lexeme=yytext(); return Guion;}
+((.)"~"(.)) {lexeme=yytext(); return Guion;}
+(".") {lexeme=yytext(); return Punto;}
+(",") {lexeme=yytext(); return Coma;}
+(";") {lexeme=yytext(); return Punto_Coma;}
+(":") {lexeme=yytext(); return Dos_Puntos;}
+("|") {lexeme=yytext(); return Or;}
+("*") {lexeme=yytext(); return Asterizco;}
+("+") {lexeme=yytext(); return Suma;}
+("?") {lexeme=yytext(); return Interrogacion;}
+("<!") {lexeme=yytext(); return Comentario_Multi_Abre;}
+("!>") {lexeme=yytext(); return Comentario_Multi_Cierra;}
+("%") {lexeme=yytext(); return Porcentaje;}
+("->") {lexeme=yytext(); return Asignacion;}
+("'"(.)*"'") {lexeme=yytext(); return Cadena;}
+("\""(.)*"\"") {lexeme=yytext(); return Cadena;}
 {L}({L}|{D})* {lexeme=yytext(); return Identificador;}
 ("(-"{D}+")")|{D}+ {lexeme=yytext(); return Numero;}
  . {return ERROR;}

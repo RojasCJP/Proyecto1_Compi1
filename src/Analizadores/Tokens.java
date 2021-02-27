@@ -1,7 +1,7 @@
 package Analizadores;
 
 public enum Tokens {
-    Reservadas,
+    CONJ,
     Identificador,
     Numero,
     Llave_Abre,
@@ -10,15 +10,16 @@ public enum Tokens {
     Punto,
     Coma,
     Punto_Coma,
+    Dos_Puntos,
     Or,
     Asterizco,
     Suma,
-    Interogacion,
+    Interrogacion,
     Comentario_Multi_Abre,
     Comentario_Multi_Cierra,
     Porcentaje,
     Linea,
-    Comilla,
-    Doble_Comilla,
+    Cadena,
+    Asignacion,
     ERROR
 }

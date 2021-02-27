@@ -2,15 +2,15 @@
   <library name="lib">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../../../../../Programs/Java/instaladores/javafx-sdk-11.0.2/lib" />
-      <root url="jar://$PROJECT_DIR$/../Jflex&amp;Jcup/Cup/java-cup-11b.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../Jflex&amp;Jcup/Cup/java-cup-11b-runtime.jar!/" />
-      <root url="file://$PROJECT_DIR$/../Jflex&amp;Jcup/Flex/Flex2/jflex-1.6.1/lib" />
+      <root url="file://$PROJECT_DIR$/../flexycup/Flex/Flex2/jflex-1.6.1/lib" />
+      <root url="jar://$PROJECT_DIR$/../flexycup/Cup/java-cup-11b-runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../flexycup/Cup/java-cup-11b.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="file://$PROJECT_DIR$/../../../../../Programs/Java/instaladores/javafx-sdk-11.0.2/lib" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/../Jflex&amp;Jcup/Flex/Flex2/jflex-1.6.1/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../flexycup/Flex/Flex2/jflex-1.6.1/lib" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/../../../../../Programs/Java/instaladores/javafx-sdk-11.0.2/lib" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/../../../../../Programs/Java/instaladores/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
   </library>

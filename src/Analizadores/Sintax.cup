@@ -1,0 +1,65 @@
+package Analizadores;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+}
+:};
+
+terminal CONJ, Identificador, Numero, Llave_Abre, Llave_Cierra, Guion, Punto, Coma, Punto_Coma, Dos_Puntos, Or,
+    Asterizco, Suma, Interrogacion, Comentario_Multi_Abre, Comentario_Multi_Cierra, Porcentaje, Linea, Cadena,
+    Asignacion, ERROR;
+
+non terminal DECLARACION_CONJUNTOS, REGEX, DECLARACION_REGEX, PREGUNTA_REGEX, GRUPO, CONTENIDO, INICIO;
+
+start with INICIO;
+
+INICIO ::=
+    Llave_Abre CONTENIDO Llave_Cierra
+;
+CONTENIDO ::=
+    CONTENIDO DECLARACION_CONJUNTOS |
+    DECLARACION_CONJUNTOS |
+    CONTENIDO DECLARACION_REGEX |
+    DECLARACION_REGEX |
+    CONTENIDO PREGUNTA_REGEX |
+    PREGUNTA_REGEX
+;
+GRUPO ::=
+    Llave_Abre Identificador Llave_Cierra
+;
+PREGUNTA_REGEX ::=
+    Identificador Dos_Puntos Cadena Punto_Coma
+;
+DECLARACION_REGEX ::=
+    Identificador Asignacion REGEX Punto_Coma
+;
+REGEX ::=
+    GRUPO |
+    Cadena |
+    Punto |
+    Or |
+    Asterizco |
+    Suma |
+    Interrogacion |
+    REGEX GRUPO |
+    REGEX Cadena |
+    REGEX Punto |
+    REGEX Or |
+    REGEX Asterizco |
+    REGEX Suma |
+    REGEX Interrogacion
+;
+DECLARACION_CONJUNTOS ::=
+    CONJ Dos_Puntos Identificador Asignacion Guion Punto_Coma
+;
+
