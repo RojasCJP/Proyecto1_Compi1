@@ -5,7 +5,7 @@ import static Analizadores.Tokens.*;
 %type Tokens
 L=[a-zA-Z_]+
 D=[0-9]+
-espacio=[ ,\t,\r,\n]+
+espacio=[ ,\t,\r]+
 %{
     public String lexeme;
 %}
@@ -13,9 +13,9 @@ espacio=[ ,\t,\r,\n]+
 (CONJ) {lexeme=yytext(); return CONJ;}
 {espacio} {/*Ignore*/}
 "//".* {/*Ignore*/}
+"\n" {return Linea;}
 ("{") {lexeme=yytext(); return Llave_Abre;}
 ("}") {lexeme=yytext(); return Llave_Cierra;}
-((.)"-"(.)) {lexeme=yytext(); return Guion;}
 ((.)"~"(.)) {lexeme=yytext(); return Guion;}
 (".") {lexeme=yytext(); return Punto;}
 (",") {lexeme=yytext(); return Coma;}

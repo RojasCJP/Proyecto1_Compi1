@@ -1,11 +1,17 @@
 package mainPage;
 
-import Analizadores.Analizadores;
+import Analizadores.Lexer;
+import Analizadores.LexerCup;
+import Analizadores.Sintax;
+import Analizadores.Tokens;
+import java_cup.runtime.Symbol;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -13,9 +19,11 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Field;
+import java.io.IOException;
+import java.io.StringReader;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
-
 
 
 public class Controller {
@@ -45,9 +53,13 @@ public class Controller {
 
     @FXML
     public void analizarEntradas(MouseEvent event) {
-        String textoEntrada = "Analisis Lexico:\n\n\nAnalisis Sintactico:";
-        Analizadores.lexer();
-        this.Salida.setText(textoEntrada);
+        try {
+            ArrayList resultadoLexico = analizarLexico();
+            //este arraylist tiene datos importantes del analizador lexico revisarlo si se necesita algo
+            analizarSintactico();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -163,4 +175,104 @@ public class Controller {
 
     }
 
+    private ArrayList analizarLexico() throws IOException {
+        int       contador  = 1;
+        String    expresion = Entrada.getText();
+        Lexer     lexer     = new Lexer(new StringReader(expresion));
+        String    resultado = "Analizador Lexico\n LINEA 1\n";
+        ArrayList tokens    = new ArrayList();
+        while (true) {
+            Tokens token = lexer.yylex();
+            if (token == null) {
+                Salida.setText(resultado);
+                return tokens;
+            }
+            switch (token) {
+                case CONJ:
+                    resultado += "\t\t>>Palabra reservada\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Identificador:
+                    resultado += "\t\t>>Identificador\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Numero:
+                    resultado += "\t\t>>Numero\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Llave_Abre:
+                    resultado += "\t\t>>Token Llave Inicio\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Llave_Cierra:
+                    resultado += "\t\t>>Token Llave Final\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Guion:
+                    resultado += "\t\t>>Conjunto\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Punto:
+                    resultado += "\t\t>>Token Punto\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Coma:
+                    resultado += "\t\t>>Token Coma\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Punto_Coma:
+                    resultado += "\t\t>>Token Punto y Coma\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Dos_Puntos:
+                    resultado += "\t\t>>Token Dos Puntos\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Or:
+                    resultado += "\t\t>>Token de Disyuncion\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Asterizco:
+                    resultado += "\t\t>>Token de 0 o mas Veces\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Suma:
+                    resultado += "\t\t>>Token de 1 o mas Veces\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Interrogacion:
+                    resultado += "\t\t>>Toke de 1 o 0 Veces\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Comentario_Multi_Abre:
+                    resultado += "\t\t>>Comienza un Comentario\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Comentario_Multi_Cierra:
+                    resultado += "\t\t>>Termina un Comentario\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Porcentaje:
+                    resultado += "\t\t>>Token de Porcentaje\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Linea:
+                    contador++;
+                    resultado += "LINEA" + contador + "\n";
+                    break;
+                case Cadena:
+                    resultado += "\t\t>>Cadena\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Asignacion:
+                    resultado += "\t\t>>Token de Asignacion\t\t" + lexer.lexeme + "\n";
+                    break;
+                case ERROR:
+                    resultado += "SE HA ENCONTRADO UN ERROR EN LA LINEA:\t\t" + contador + "\tERROR ENCONTRADO DESPUES DE:\t\t" + lexer.lexeme + "\n";
+                    break;
+            }
+            String[] conjuntoTokens = {token.name(), lexer.lexeme};
+            tokens.add(conjuntoTokens);
+        }
+    }
+
+    private void analizarSintactico() {
+        String    expresion            = Entrada.getText();
+        String    resultado            = Salida.getText();
+        Sintax    sintax               = new Sintax(new LexerCup(new StringReader(expresion)));
+        ArrayList expresionesRegulares = new ArrayList();
+        try {
+            sintax.parse();
+            resultado += "ANALISIS SINTACTICO REALIZADO CORRECTAMENTE";
+            expresionesRegulares = sintax.meVaAServir;
+        } catch (Exception e) {
+            Symbol syms = sintax.getS();
+            resultado += "ERROR DE SINTAXIS EN LA LINEA: " + (syms.right + 1) + " COLUMNA: " + (syms.left + 1) + ", TEXTO: \"" + syms.value + "\"";
+
+        }
+        Salida.setText(resultado);
+    }
+//todo hacer el manejo de errores creo que sale facil
 }

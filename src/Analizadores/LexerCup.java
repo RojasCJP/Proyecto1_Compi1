@@ -8,7 +8,7 @@ import java_cup.runtime.Symbol;
  * <a href="http://www.jflex.de/">JFlex</a> 1.6.1
  * from the specification file <tt>src/Analizadores/LexerCup.flex</tt>
  */
-class LexerCup implements java_cup.runtime.Scanner {
+public class LexerCup implements java_cup.runtime.Scanner {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -33,11 +33,11 @@ class LexerCup implements java_cup.runtime.Scanner {
    * Translates characters to character classes
    */
   private static final String ZZ_CMAP_PACKED = 
-    "\11\0\1\3\1\11\1\12\1\12\1\11\22\0\1\3\1\27\1\33"+
-    "\2\0\1\31\1\0\1\32\1\34\1\35\1\23\1\24\1\3\1\15"+
-    "\1\17\1\10\12\2\1\21\1\20\1\26\1\0\1\30\1\25\1\0"+
+    "\11\0\1\3\1\11\1\12\1\12\1\11\22\0\1\3\1\26\1\33"+
+    "\2\0\1\30\1\0\1\32\1\34\1\35\1\22\1\23\1\3\1\31"+
+    "\1\16\1\10\12\2\1\20\1\17\1\25\1\0\1\27\1\24\1\0"+
     "\2\1\1\4\6\1\1\7\3\1\1\6\1\5\13\1\4\0\1\1"+
-    "\1\0\32\1\1\13\1\22\1\14\1\16\6\0\1\12\u1fa2\0\1\12"+
+    "\1\0\32\1\1\13\1\21\1\14\1\15\6\0\1\12\u1fa2\0\1\12"+
     "\1\12\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
 
   /** 
@@ -52,13 +52,13 @@ class LexerCup implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\1\2\1\3\1\4\1\2\1\1\1\4"+
-    "\1\5\1\6\1\1\1\7\1\10\1\11\1\12\1\13"+
-    "\1\14\1\15\2\1\1\16\3\1\1\0\1\2\1\3"+
-    "\1\2\1\4\1\17\1\20\1\21\2\0\1\22\2\0"+
-    "\1\22\1\0\1\23\1\2\3\23\1\24\1\0\1\3";
+    "\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14"+
+    "\1\15\2\1\1\16\4\1\1\0\1\2\1\3\1\2"+
+    "\1\4\1\17\1\20\1\21\2\0\1\22\2\0\1\22"+
+    "\1\0\1\23\1\2\2\23\1\0\1\24\1\3";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[47];
+    int [] result = new int[46];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -84,14 +84,14 @@ class LexerCup implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\36\0\74\0\132\0\170\0\226\0\264\0\322"+
-    "\0\36\0\36\0\360\0\36\0\36\0\36\0\36\0\36"+
-    "\0\36\0\36\0\u010e\0\u012c\0\36\0\u014a\0\u0168\0\u0186"+
+    "\0\36\0\36\0\36\0\36\0\36\0\36\0\36\0\36"+
+    "\0\36\0\360\0\u010e\0\36\0\u012c\0\u014a\0\u0168\0\u0186"+
     "\0\u01a4\0\u01c2\0\u01e0\0\u01fe\0\u021c\0\u023a\0\u023a\0\u023a"+
     "\0\u0258\0\u0276\0\u0258\0\u0294\0\u02b2\0\u0294\0\u02d0\0\u023a"+
-    "\0\u02ee\0\u0258\0\u0294\0\u030c\0\u01c2\0\u030c\0\u023a";
+    "\0\u02ee\0\u0258\0\u0294\0\u030c\0\u01c2\0\u023a";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[47];
+    int [] result = new int[46];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -115,23 +115,23 @@ class LexerCup implements java_cup.runtime.Scanner {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\2\1\3\1\4\1\5\1\6\3\3\1\7\1\10"+
-    "\1\0\1\11\1\12\1\13\1\2\1\14\1\15\1\16"+
-    "\1\17\1\20\1\21\1\22\1\23\1\24\1\2\1\25"+
-    "\1\26\1\27\1\30\1\2\15\0\2\31\20\0\2\32"+
-    "\1\0\4\32\5\0\2\31\21\0\1\33\12\0\2\31"+
-    "\22\0\1\10\5\0\1\10\3\0\2\31\20\0\2\32"+
-    "\1\0\1\32\1\34\2\32\5\0\2\31\27\0\1\35"+
-    "\4\0\2\31\22\0\1\10\5\0\1\10\41\0\2\31"+
-    "\11\0\1\36\22\0\2\31\10\0\1\37\23\0\2\31"+
-    "\11\0\1\40\5\0\11\41\2\0\2\41\2\42\13\41"+
-    "\1\43\3\41\11\44\2\0\2\44\2\45\14\44\1\46"+
-    "\2\44\15\0\1\47\1\31\17\0\11\50\2\0\23\50"+
-    "\1\0\2\32\1\0\4\32\30\0\1\33\34\0\2\32"+
-    "\1\0\2\32\1\51\1\32\26\0\11\35\2\0\23\35"+
-    "\36\0\11\41\2\0\17\41\1\43\3\41\11\52\2\0"+
-    "\23\52\11\44\2\0\20\44\1\46\2\44\11\53\2\0"+
-    "\23\53\2\50\1\54\6\50\2\0\23\50\1\0\2\32"+
-    "\1\0\3\32\1\55\30\0\1\56\32\0\1\57";
+    "\1\0\1\11\1\12\1\2\1\13\1\14\1\15\1\16"+
+    "\1\17\1\20\1\21\1\22\1\23\1\2\1\24\1\25"+
+    "\1\26\1\27\1\30\1\2\15\0\1\31\21\0\2\32"+
+    "\1\0\4\32\5\0\1\31\22\0\1\33\12\0\1\31"+
+    "\23\0\1\10\5\0\1\10\3\0\1\31\21\0\2\32"+
+    "\1\0\1\32\1\34\2\32\5\0\1\31\30\0\1\35"+
+    "\4\0\1\31\23\0\1\10\5\0\1\10\41\0\1\31"+
+    "\10\0\1\36\24\0\1\31\11\0\1\37\23\0\1\31"+
+    "\11\0\1\40\6\0\11\41\2\0\2\41\1\42\14\41"+
+    "\1\43\3\41\11\44\2\0\2\44\1\45\15\44\1\46"+
+    "\2\44\15\0\1\31\13\0\1\47\4\0\11\50\2\0"+
+    "\23\50\1\0\2\32\1\0\4\32\30\0\1\33\34\0"+
+    "\2\32\1\0\2\32\1\51\1\32\26\0\11\35\2\0"+
+    "\23\35\36\0\11\41\2\0\17\41\1\43\3\41\11\52"+
+    "\2\0\23\52\11\44\2\0\20\44\1\46\2\44\11\53"+
+    "\2\0\23\53\2\0\1\54\34\0\2\32\1\0\3\32"+
+    "\1\55\30\0\1\54\32\0\1\56";
 
   private static int [] zzUnpackTrans() {
     int [] result = new int[810];
@@ -173,10 +173,10 @@ class LexerCup implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\1\0\27\1\1\0\4\1\3\11\2\0\1\1\2\0"+
-    "\1\1\1\0\1\11\5\1\1\0\1\11";
+    "\1\1\1\0\1\11\3\1\1\0\1\1\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[47];
+    int [] result = new int[46];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -265,7 +265,7 @@ class LexerCup implements java_cup.runtime.Scanner {
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  LexerCup(java.io.Reader in) {
+  public LexerCup(java.io.Reader in) {
     this.zzReader = in;
   }
 
@@ -698,15 +698,15 @@ class LexerCup implements java_cup.runtime.Scanner {
             }
           case 34: break;
           case 15: 
-            { return new Symbol(sym.Asignacion, yychar, yyline, yytext());
+            { return new Symbol(sym.Comentario_Multi_Abre, yychar, yyline, yytext());
             }
           case 35: break;
           case 16: 
-            { return new Symbol(sym.Comentario_Multi_Abre, yychar, yyline, yytext());
+            { return new Symbol(sym.Comentario_Multi_Cierra, yychar, yyline, yytext());
             }
           case 36: break;
           case 17: 
-            { return new Symbol(sym.Comentario_Multi_Cierra, yychar, yyline, yytext());
+            { return new Symbol(sym.Asignacion, yychar, yyline, yytext());
             }
           case 37: break;
           case 18: 

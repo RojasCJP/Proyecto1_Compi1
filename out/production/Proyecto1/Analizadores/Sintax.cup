@@ -1,6 +1,7 @@
 package Analizadores;
 
 import java_cup.runtime.Symbol;
+import Arbol.Nodo;
 
 parser code
 {:
@@ -15,51 +16,80 @@ parser code
 }
 :};
 
-terminal CONJ, Identificador, Numero, Llave_Abre, Llave_Cierra, Guion, Punto, Coma, Punto_Coma, Dos_Puntos, Or,
-    Asterizco, Suma, Interrogacion, Comentario_Multi_Abre, Comentario_Multi_Cierra, Porcentaje, Linea, Cadena,
-    Asignacion, ERROR;
+terminal CONJ;
+terminal String Identificador;
+terminal Numero;
+terminal String Llave_Abre;
+terminal String Llave_Cierra;
+terminal Guion;
+terminal Punto;
+terminal Coma;
+terminal Punto_Coma;
+terminal Dos_Puntos;
+terminal Or;
+terminal Asterizco;
+terminal Suma;
+terminal Interrogacion;
+terminal Comentario_Multi_Abre;
+terminal Comentario_Multi_Cierra;
+terminal Porcentaje;
+terminal Linea;
+terminal String Cadena;
+terminal Asignacion;
+terminal ERROR;
 
-non terminal DECLARACION_CONJUNTOS, REGEX, DECLARACION_REGEX, PREGUNTA_REGEX, GRUPO, CONTENIDO, INICIO;
+non terminal PORCENTAJES;
+non terminal DECLARACION_CONJUNTOS;
+non terminal Nodo REGEX;
+non terminal DECLARACION_REGEX;
+non terminal PREGUNTA_REGEX;
+non terminal String GRUPO;
+non terminal CONTENIDO;
+non terminal INICIO;
 
 start with INICIO;
 
 INICIO ::=
     Llave_Abre CONTENIDO Llave_Cierra
 ;
+
 CONTENIDO ::=
     CONTENIDO DECLARACION_CONJUNTOS |
     DECLARACION_CONJUNTOS |
     CONTENIDO DECLARACION_REGEX |
     DECLARACION_REGEX |
     CONTENIDO PREGUNTA_REGEX |
-    PREGUNTA_REGEX
+    PREGUNTA_REGEX |
+    CONTENIDO PORCENTAJES |
+    PORCENTAJES
 ;
+
 GRUPO ::=
-    Llave_Abre Identificador Llave_Cierra
+    Llave_Abre Identificador:a Llave_Cierra {:RESULT="{"+a+"}";:}
 ;
+
 PREGUNTA_REGEX ::=
     Identificador Dos_Puntos Cadena Punto_Coma
 ;
+
 DECLARACION_REGEX ::=
-    Identificador Asignacion REGEX Punto_Coma
+    Identificador Asignacion REGEX:a Punto_Coma {:System.out.println("El valor de la expresión es: "+a.getValue());:}
 ;
+
 REGEX ::=
-    GRUPO |
-    Cadena |
-    Punto |
-    Or |
-    Asterizco |
-    Suma |
-    Interrogacion |
-    REGEX GRUPO |
-    REGEX Cadena |
-    REGEX Punto |
-    REGEX Or |
-    REGEX Asterizco |
-    REGEX Suma |
-    REGEX Interrogacion
+    Punto REGEX:a REGEX:b {:RESULT=new Nodo(".",a,b);:}|
+    Or REGEX:a REGEX:b {:RESULT=new Nodo("|",a,b);:}|
+    Asterizco REGEX:a {:RESULT=new Nodo("*",a,null);:}|
+    Suma REGEX:a {:RESULT=new Nodo("+",a,null);:}|
+    Interrogacion REGEX:a {:RESULT=new Nodo("?",a,null);:}|
+    Cadena:a {:RESULT=new Nodo(a,null,null);:} |
+    GRUPO:a {:RESULT=new Nodo(a,null,null);:}
 ;
+
 DECLARACION_CONJUNTOS ::=
     CONJ Dos_Puntos Identificador Asignacion Guion Punto_Coma
 ;
 
+PORCENTAJES ::=
+    Porcentaje Porcentaje
+;

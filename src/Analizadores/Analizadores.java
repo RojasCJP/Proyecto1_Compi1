@@ -8,6 +8,10 @@ import java.nio.file.Paths;
 
 public class Analizadores {
 
+    public static void main(String[] args) {
+        lexer();
+    }
+
     public static void lexer()  {
         // codigo sacado de https://youtu.be/4Z6Tnit810Y
         String   rutaLexico1    = "src/Analizadores/Lexer.flex";

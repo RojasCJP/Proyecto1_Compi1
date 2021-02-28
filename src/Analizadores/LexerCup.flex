@@ -24,7 +24,6 @@ CONJ {return new Symbol(sym.CONJ, yychar, yyline, yytext());}
 ("//"(.)*) {/*Ignore*/}
 ("{") {return new Symbol(sym.Llave_Abre, yychar, yyline, yytext());}
 ("}") {return new Symbol(sym.Llave_Cierra, yychar, yyline, yytext());}
-((.)"-"(.)) {return new Symbol(sym.Guion, yychar, yyline, yytext());}
 ((.)"~"(.)) {return new Symbol(sym.Guion, yychar, yyline, yytext());}
 (".") {return new Symbol(sym.Punto, yychar, yyline, yytext());}
 (",") {return new Symbol(sym.Coma, yychar, yyline, yytext());}
