@@ -8,7 +8,7 @@ public class Traductor {
     private String entrada;
     private String salida;
 
-    private char[] operadores = new char[9];
+    private char[] operadores = new char[11];
 
     public Traductor() {
         operadores[0] = '.';
@@ -18,8 +18,10 @@ public class Traductor {
         operadores[4] = '?';
         operadores[5] = '{';
         operadores[6] = '}';
-        operadores[7] = '"';
-        operadores[8] = ';';
+        operadores[7] = ';';
+        operadores[8] = '#';
+//        operadores[9] = '\"';
+//        operadores[10] = '\'';
     }
 
     public String getEntrada() {
@@ -50,20 +52,35 @@ public class Traductor {
     public ArrayList<String> separador() {
         ArrayList<String> separado      = new ArrayList<String>();
         String            identificador = "";
+        boolean           cadena        = true;
         for (int i = 0; i < entrada.length(); i++) {
             if (entrada.charAt(i) != ' ' && entrada.charAt(i) != '\n' && entrada.charAt(i) != '\t' && entrada.charAt(i) != '\r') {
                 if (inOperadores(entrada.charAt(i))) {
-                    if (identificador != "") {
-                        separado.add(identificador);
-                        identificador = "";
+                    if (cadena) {
+                        if (identificador != "") {
+                            separado.add(identificador);
+                            identificador = "";
+                        }
+                        separado.add(Character.toString(entrada.charAt(i)));
+                    } else {
+                        identificador += entrada.charAt(i);
                     }
-                    separado.add(Character.toString(entrada.charAt(i)));
                 } else {
+                    if ((entrada.charAt(i) == '\"' || entrada.charAt(i) == '\'') && cadena) {
+                        cadena = false;
+                    } else if ((entrada.charAt(i) == '\"' || entrada.charAt(i) == '\'') && !cadena) {
+                        cadena = true;
+                    }
                     identificador += entrada.charAt(i);
                 }
             }
         }
+        for (int i = 0; i < separado.size(); i++) {
+            separado.remove("{");
+            separado.remove("}");
+            separado.remove("\"");
+            separado.remove("\'");
+        }
         return separado;
     }
-    //todo ya solo tengo que hacer la traduccion
 }

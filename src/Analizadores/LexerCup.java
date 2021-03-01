@@ -537,10 +537,12 @@ public class LexerCup implements java_cup.runtime.Scanner {
         case '\u2028':
         case '\u2029':
           yyline++;
+          yycolumn = 0;
           zzR = false;
           break;
         case '\r':
           yyline++;
+          yycolumn = 0;
           zzR = true;
           break;
         case '\n':
@@ -548,10 +550,12 @@ public class LexerCup implements java_cup.runtime.Scanner {
             zzR = false;
           else {
             yyline++;
+            yycolumn = 0;
           }
           break;
         default:
           zzR = false;
+          yycolumn += zzCharCount;
         }
       }
 
@@ -642,15 +646,15 @@ public class LexerCup implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { return new Symbol(sym.ERROR, yychar, yyline, yytext());
+            { System.out.println("error aqui");
             }
           case 21: break;
           case 2: 
-            { return new Symbol(sym.Identificador, yychar, yyline, yytext());
+            { return new Symbol(sym.Identificador, yycolumn, yyline, yytext());
             }
           case 22: break;
           case 3: 
-            { return new Symbol(sym.Numero, yychar, yyline, yytext());
+            { return new Symbol(sym.Numero, yycolumn, yyline, yytext());
             }
           case 23: break;
           case 4: 
@@ -658,67 +662,67 @@ public class LexerCup implements java_cup.runtime.Scanner {
             }
           case 24: break;
           case 5: 
-            { return new Symbol(sym.Llave_Abre, yychar, yyline, yytext());
+            { return new Symbol(sym.Llave_Abre, yycolumn, yyline, yytext());
             }
           case 25: break;
           case 6: 
-            { return new Symbol(sym.Llave_Cierra, yychar, yyline, yytext());
+            { return new Symbol(sym.Llave_Cierra, yycolumn, yyline, yytext());
             }
           case 26: break;
           case 7: 
-            { return new Symbol(sym.Punto, yychar, yyline, yytext());
+            { return new Symbol(sym.Punto, yycolumn, yyline, yytext());
             }
           case 27: break;
           case 8: 
-            { return new Symbol(sym.Punto_Coma, yychar, yyline, yytext());
+            { return new Symbol(sym.Punto_Coma, yycolumn, yyline, yytext());
             }
           case 28: break;
           case 9: 
-            { return new Symbol(sym.Dos_Puntos, yychar, yyline, yytext());
+            { return new Symbol(sym.Dos_Puntos, yycolumn, yyline, yytext());
             }
           case 29: break;
           case 10: 
-            { return new Symbol(sym.Or, yychar, yyline, yytext());
+            { return new Symbol(sym.Or, yycolumn, yyline, yytext());
             }
           case 30: break;
           case 11: 
-            { return new Symbol(sym.Asterizco, yychar, yyline, yytext());
+            { return new Symbol(sym.Asterizco, yycolumn, yyline, yytext());
             }
           case 31: break;
           case 12: 
-            { return new Symbol(sym.Suma, yychar, yyline, yytext());
+            { return new Symbol(sym.Suma, yycolumn, yyline, yytext());
             }
           case 32: break;
           case 13: 
-            { return new Symbol(sym.Interrogacion, yychar, yyline, yytext());
+            { return new Symbol(sym.Interrogacion, yycolumn, yyline, yytext());
             }
           case 33: break;
           case 14: 
-            { return new Symbol(sym.Porcentaje, yychar, yyline, yytext());
+            { return new Symbol(sym.Porcentaje, yycolumn, yyline, yytext());
             }
           case 34: break;
           case 15: 
-            { return new Symbol(sym.Comentario_Multi_Abre, yychar, yyline, yytext());
+            { return new Symbol(sym.Comentario_Multi_Abre, yycolumn, yyline, yytext());
             }
           case 35: break;
           case 16: 
-            { return new Symbol(sym.Comentario_Multi_Cierra, yychar, yyline, yytext());
+            { return new Symbol(sym.Comentario_Multi_Cierra, yycolumn, yyline, yytext());
             }
           case 36: break;
           case 17: 
-            { return new Symbol(sym.Asignacion, yychar, yyline, yytext());
+            { return new Symbol(sym.Asignacion, yycolumn, yyline, yytext());
             }
           case 37: break;
           case 18: 
-            { return new Symbol(sym.Cadena, yychar, yyline, yytext());
+            { return new Symbol(sym.Cadena, yycolumn, yyline, yytext());
             }
           case 38: break;
           case 19: 
-            { return new Symbol(sym.Guion, yychar, yyline, yytext());
+            { return new Symbol(sym.Guion, yycolumn, yyline, yytext());
             }
           case 39: break;
           case 20: 
-            { return new Symbol(sym.CONJ, yychar, yyline, yytext());
+            { return new Symbol(sym.CONJ, yycolumn, yyline, yytext());
             }
           case 40: break;
           default:

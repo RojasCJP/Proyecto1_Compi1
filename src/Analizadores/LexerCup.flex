@@ -7,6 +7,8 @@ import java_cup.runtime.Symbol;
 %full
 %line
 %char
+%column
+%public
 L=[a-zA-Z_]+
 D=[0-9]+
 espacio=[ ,\t,\r,\n]+
@@ -19,26 +21,26 @@ espacio=[ ,\t,\r,\n]+
     }
 %}
 %%
-CONJ {return new Symbol(sym.CONJ, yychar, yyline, yytext());}
+CONJ {return new Symbol(sym.CONJ, yycolumn, yyline, yytext());}
 {espacio} {/*Ignore*/}
 ("//"(.)*) {/*Ignore*/}
-("{") {return new Symbol(sym.Llave_Abre, yychar, yyline, yytext());}
-("}") {return new Symbol(sym.Llave_Cierra, yychar, yyline, yytext());}
-((.)"~"(.)) {return new Symbol(sym.Guion, yychar, yyline, yytext());}
-(".") {return new Symbol(sym.Punto, yychar, yyline, yytext());}
-(",") {return new Symbol(sym.Coma, yychar, yyline, yytext());}
-(";") {return new Symbol(sym.Punto_Coma, yychar, yyline, yytext());}
-(":") {return new Symbol(sym.Dos_Puntos, yychar, yyline, yytext());}
-("|") {return new Symbol(sym.Or, yychar, yyline, yytext());}
-("*") {return new Symbol(sym.Asterizco, yychar, yyline, yytext());}
-("+") {return new Symbol(sym.Suma, yychar, yyline, yytext());}
-("?") {return new Symbol(sym.Interrogacion, yychar, yyline, yytext());}
-("<!") {return new Symbol(sym.Comentario_Multi_Abre, yychar, yyline, yytext());}
-("!>") {return new Symbol(sym.Comentario_Multi_Cierra, yychar, yyline, yytext());}
-("%") {return new Symbol(sym.Porcentaje, yychar, yyline, yytext());}
-("->") {return new Symbol(sym.Asignacion, yychar, yyline, yytext());}
-("'"(.)*"'") {return new Symbol(sym.Cadena, yychar, yyline, yytext());}
-("\""(.)*"\"") {return new Symbol(sym.Cadena, yychar, yyline, yytext());}
-{L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
-("(-"{D}+")")|{D}+ {return new Symbol(sym.Numero, yychar, yyline, yytext());}
- . {return new Symbol(sym.ERROR, yychar, yyline, yytext());}
+("{") {return new Symbol(sym.Llave_Abre, yycolumn, yyline, yytext());}
+("}") {return new Symbol(sym.Llave_Cierra, yycolumn, yyline, yytext());}
+((.)"~"(.)) {return new Symbol(sym.Guion, yycolumn, yyline, yytext());}
+(".") {return new Symbol(sym.Punto, yycolumn, yyline, yytext());}
+(",") {return new Symbol(sym.Coma, yycolumn, yyline, yytext());}
+(";") {return new Symbol(sym.Punto_Coma, yycolumn, yyline, yytext());}
+(":") {return new Symbol(sym.Dos_Puntos, yycolumn, yyline, yytext());}
+("|") {return new Symbol(sym.Or, yycolumn, yyline, yytext());}
+("*") {return new Symbol(sym.Asterizco, yycolumn, yyline, yytext());}
+("+") {return new Symbol(sym.Suma, yycolumn, yyline, yytext());}
+("?") {return new Symbol(sym.Interrogacion, yycolumn, yyline, yytext());}
+("<!") {return new Symbol(sym.Comentario_Multi_Abre, yycolumn, yyline, yytext());}
+("!>") {return new Symbol(sym.Comentario_Multi_Cierra, yycolumn, yyline, yytext());}
+("%") {return new Symbol(sym.Porcentaje, yycolumn, yyline, yytext());}
+("->") {return new Symbol(sym.Asignacion, yycolumn, yyline, yytext());}
+("'"(.)*"'") {return new Symbol(sym.Cadena, yycolumn, yyline, yytext());}
+("\""(.)*"\"") {return new Symbol(sym.Cadena, yycolumn, yyline, yytext());}
+{L}({L}|{D})* {return new Symbol(sym.Identificador, yycolumn, yyline, yytext());}
+("(-"{D}+")")|{D}+ {return new Symbol(sym.Numero, yycolumn, yyline, yytext());}
+ . {System.out.println("error aqui");}

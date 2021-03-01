@@ -4,6 +4,8 @@ import Analizadores.Lexer;
 import Analizadores.LexerCup;
 import Analizadores.Sintax;
 import Analizadores.Tokens;
+import Arbol.Metodo;
+import Arbol.Nodo;
 import java_cup.runtime.Symbol;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -158,7 +160,6 @@ public class Controller {
 
             this.Archivos.setRoot(root);
             root.getChildren().addAll(arboles, afnd, siguientes, transiciones, afd, errores, salidas);
-            //todo tengo que hacer que muestre los archivos y no nombres que yo queme, para eso tengo que ver manejo de archivos creo
             this.tree = true;
 
         }
@@ -267,6 +268,13 @@ public class Controller {
             sintax.parse();
             resultado += "ANALISIS SINTACTICO REALIZADO CORRECTAMENTE";
             expresionesRegulares = sintax.meVaAServir;
+            for (int i = 0; i < expresionesRegulares.size(); i++) {
+                Metodo metodo      = new Metodo();
+                Nodo   nodo        = (Nodo) expresionesRegulares.get(i);
+                String regexPolaca = nodo.notacionPolaca();
+                metodo.setRegex(regexPolaca);
+                metodo.metodoArbol();
+            }
         } catch (Exception e) {
             Symbol syms = sintax.getS();
             resultado += "ERROR DE SINTAXIS EN LA LINEA: " + (syms.right + 1) + " COLUMNA: " + (syms.left + 1) + ", TEXTO: \"" + syms.value + "\"";
@@ -274,5 +282,4 @@ public class Controller {
         }
         Salida.setText(resultado);
     }
-//todo hacer el manejo de errores creo que sale facil
 }

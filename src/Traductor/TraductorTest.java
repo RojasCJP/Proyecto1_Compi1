@@ -12,7 +12,7 @@ class TraductorTest {
     @Test
     public void test() {
         Traductor test      = new Traductor();
-        boolean   resultado = test.inOperadores('"');
+        boolean   resultado = test.inOperadores('#');
         assertEquals(true, resultado);
     }
 
@@ -26,25 +26,26 @@ class TraductorTest {
     @Test
     public void separador() {
         Traductor test = new Traductor();
-        test.setEntrada(". {letra} * | \"_\" | {letra} {digito};");
+        test.setEntrada(". {letra} * | '.' | {letra} .{digito}#");
         ArrayList<String> array = new ArrayList<String>();
         array.add(".");
-        array.add("{");
+//        array.add("{");
         array.add("letra");
-        array.add("}");
+//        array.add("}");
         array.add("*");
         array.add("|");
-        array.add("\"");
-        array.add("_");
-        array.add("\"");
+//        array.add("\"");
+        array.add("'.'");
+//        array.add("\"");
         array.add("|");
-        array.add("{");
+//        array.add("{");
         array.add("letra");
-        array.add("}");
-        array.add("{");
+//        array.add("}");
+        array.add(".");
+//        array.add("{");
         array.add("digito");
-        array.add("}");
-        array.add(";");
+//        array.add("}");
+        array.add("#");
         ArrayList<String> resultado = test.separador();
         System.out.println(resultado);
         assertEquals(array, resultado);

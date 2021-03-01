@@ -11,20 +11,31 @@ public class Nodo {
         this.izquierdo = izquierdo;
         this.derecho = derecho;
     }
-//System.out.println("La expresion regular es: " + a.getValorNodo());
-//                    if (a != null) {
-//       meVaAServir.add(a.getValorNodo());
-//    } todo tengo que insertar esto en sintax java si es que lo vuelvo a tener que hacer
+
     public String getValorNodo() {
         if ((this.izquierdo == null) && (this.derecho == null)) {
             return this.value;
         } else if ((this.izquierdo != null) && (this.derecho == null)) {
             String valorIzquierdo = this.izquierdo.getValorNodo();
-            return "("+valorIzquierdo + this.value+")";
+            return "(" + valorIzquierdo + this.value + ")";
         } else if ((this.izquierdo != null) && (this.derecho != null)) {
             String valorIzquierdo = this.izquierdo.getValorNodo();
             String valorDerecho   = this.derecho.getValorNodo();
-            return "("+valorIzquierdo + this.value + valorDerecho+")";
+            return "(" + valorIzquierdo + this.value + valorDerecho + ")";
+        }
+        return "ocurrio un error";
+    }
+
+    public String notacionPolaca() {
+        if ((this.izquierdo == null) && (this.derecho == null)) {
+            return this.value;
+        } else if ((this.izquierdo != null) && (this.derecho == null)) {
+            String valorIzquierdo = this.izquierdo.notacionPolaca();
+            return this.value + valorIzquierdo;
+        } else if ((this.izquierdo != null) && (this.derecho != null)) {
+            String valorIzquierdo = this.izquierdo.notacionPolaca();
+            String valorDerecho   = this.derecho.notacionPolaca();
+            return this.value + valorIzquierdo + valorDerecho;
         }
         return "ocurrio un error";
     }

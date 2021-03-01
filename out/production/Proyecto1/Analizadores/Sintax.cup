@@ -2,9 +2,11 @@ package Analizadores;
 
 import java_cup.runtime.Symbol;
 import Arbol.Nodo;
+import java.util.ArrayList;
 
 parser code
 {:
+public ArrayList meVaAServir = new ArrayList();
     private Symbol s;
 
     public void syntax_error(Symbol s){
@@ -13,7 +15,7 @@ parser code
 
     public Symbol getS(){
         return this.s;
-}
+    }
 :};
 
 terminal CONJ;
@@ -61,7 +63,9 @@ CONTENIDO ::=
     CONTENIDO PREGUNTA_REGEX |
     PREGUNTA_REGEX |
     CONTENIDO PORCENTAJES |
-    PORCENTAJES
+    PORCENTAJES |
+    CONTENIDO error Punto_Coma|
+    error Punto_Coma
 ;
 
 GRUPO ::=
@@ -73,7 +77,12 @@ PREGUNTA_REGEX ::=
 ;
 
 DECLARACION_REGEX ::=
-    Identificador Asignacion REGEX:a Punto_Coma {:System.out.println("El valor de la expresión es: "+a.getValue());:}
+    Identificador Asignacion REGEX:a Punto_Coma {:System.out.println("El valor de la expresión es: "+a.getValue());
+    System.out.println("La expresion regular es: " + a.getValorNodo());
+                        if (a != null) {
+           meVaAServir.add(a);
+       }
+    :}
 ;
 
 REGEX ::=
