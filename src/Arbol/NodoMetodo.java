@@ -4,17 +4,18 @@ import java.util.ArrayList;
 
 public class NodoMetodo {
     //codigo visto en clase
-    ArrayList<Integer>    primero;
-    ArrayList<Integer>    ultimo;
-    boolean               anulable;
-    String                lexema;
-    Types                 type;
-    int                   numero;
-    boolean               acepta;
-    Object                izquierda;
-    Object                derecha;
-    ArrayList<NodoMetodo> leaves;
-    ArrayList<ArrayList> table;
+    public        ArrayList<Integer>    primero;
+    public        ArrayList<Integer>    ultimo;
+    public        boolean               anulable;
+    public        String                lexema;
+    public        Types                 type;
+    public        int                   numero;
+    public        boolean               acepta;
+    public        Object                izquierda;
+    public        Object                derecha;
+    public        ArrayList<NodoMetodo> leaves;
+    public        ArrayList<ArrayList>  table;
+    public static ArrayList             nodosNecesarios = new ArrayList();
 
     public NodoMetodo(String lexema, Types type, int numero, Object izquierda, Object derecha, ArrayList<NodoMetodo> leaves, ArrayList<ArrayList> table) {
         this.primero = new ArrayList();
@@ -89,26 +90,28 @@ public class NodoMetodo {
         return this;
     }
 
-    public Object follow(){
-        Object leftFollow=  this.izquierda instanceof NodoMetodo ? ((NodoMetodo) this.izquierda).follow() : null;
-        Object rightFollow =  this.derecha instanceof NodoMetodo ? ((NodoMetodo) this.derecha).follow() : null;
-        if(null != this.type) {
+    public Object follow() {
+        Object leftFollow  = this.izquierda instanceof NodoMetodo ? ((NodoMetodo) this.izquierda).follow() : null;
+        Object rightFollow = this.derecha instanceof NodoMetodo ? ((NodoMetodo) this.derecha).follow() : null;
+        if (null != this.type) {
             switch (this.type) {
                 case AND:
                     assert leftFollow != null;
-                    for (int item : ((NodoMetodo)leftFollow).ultimo) {
-                        Leave hoja = new Leave();
-                        NodoMetodo nodo = hoja.getLeave(item, leaves);
-                        FollowTable tabla = new FollowTable();
-                        tabla.append(nodo.numero, nodo.lexema, ((NodoMetodo) rightFollow).primero, table);
+                    for (int item : ((NodoMetodo) leftFollow).ultimo) {
+                        Leave       hoja         = new Leave();
+                        NodoMetodo  nodo         = hoja.getLeave(item, leaves);
+                        FollowTable tabla        = new FollowTable();
+                        ArrayList   rightPrimero = new ArrayList();
+                        rightPrimero = ((NodoMetodo) rightFollow).primero;
+                        tabla.append(nodo.numero, nodo.lexema, rightPrimero, table);
                     }
                     break;
                 case KLEENE:
                 case MAS:
                     assert leftFollow != null;
-                    for (int item : ((NodoMetodo)leftFollow).ultimo) {
-                        Leave hoja = new Leave();
-                        NodoMetodo nodo = hoja.getLeave(item, leaves);
+                    for (int item : ((NodoMetodo) leftFollow).ultimo) {
+                        Leave       hoja  = new Leave();
+                        NodoMetodo  nodo  = hoja.getLeave(item, leaves);
                         FollowTable tabla = new FollowTable();
                         tabla.append(nodo.numero, nodo.lexema, ((NodoMetodo) leftFollow).primero, table);
                     }
@@ -119,5 +122,28 @@ public class NodoMetodo {
         }
 
         return this;
+    }
+
+    public String graficarArbol() {
+        if ((this.izquierda == null) && (this.derecha == null)) {
+            ArrayList nodo = new ArrayList();
+            nodo.add(this);
+            nodosNecesarios.add(nodo);
+            return this.lexema;
+        } else if ((this.izquierda != null) && (this.derecha == null)) {
+            String    valorIzquierdo = ((NodoMetodo) this.izquierda).graficarArbol();
+            ArrayList nodo           = new ArrayList();
+            nodo.add(this);
+            nodosNecesarios.add(nodo);
+            return "(" + valorIzquierdo + this.lexema + ")";
+        } else if ((this.izquierda != null) && (this.derecha != null)) {
+            String    valorIzquierdo = ((NodoMetodo) this.izquierda).graficarArbol();
+            String    valorDerecho   = ((NodoMetodo) this.derecha).graficarArbol();
+            ArrayList nodo           = new ArrayList();
+            nodo.add(this);
+            nodosNecesarios.add(nodo);
+            return "(" + valorIzquierdo + this.lexema + valorDerecho + ")";
+        }
+        return "Ocurrio un error";
     }
 }

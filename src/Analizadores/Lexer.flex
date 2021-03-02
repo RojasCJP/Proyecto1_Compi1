@@ -6,7 +6,7 @@ import static Analizadores.Tokens.*;
 %public
 L=[a-zA-Z_]+
 D=[0-9]+
-espacio=[ ,\t,\r]+
+espacio=[" ",\t,\r]+
 %{
     public String lexeme;
 %}

@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Stack;
 
 public class Tree {
-//codigo visto en clase
+    //codigo visto en clase
     private NodoMetodo root;
 
     public Tree(String regex, ArrayList<NodoMetodo> leaves, ArrayList<ArrayList> table) {
@@ -17,6 +17,7 @@ public class Tree {
         Traductor traductor = new Traductor();
         traductor.setEntrada(regex);
         ArrayList<String> regexList = traductor.separador();
+        numLeave.contenido = traductor.numeroDeExpresiones();
         Collections.reverse(regexList);
 
         for (String character : regexList) {
@@ -49,7 +50,7 @@ public class Tree {
                     pila.push(nodoInterrogacion);
                     break;
                 default:
-                    NodoMetodo nodoHoja = new NodoMetodo(character, Types.HOJA, numLeave.getNum(), null, null, leaves, table);
+                    NodoMetodo nodoHoja = new NodoMetodo(character, Types.HOJA, numLeave.getNum()+1, null, null, leaves, table);
                     pila.push(nodoHoja);
                     Leave leave = new Leave();
                     leave.addLeave(nodoHoja, leaves);

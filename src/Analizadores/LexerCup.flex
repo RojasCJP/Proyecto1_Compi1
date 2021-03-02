@@ -11,7 +11,7 @@ import java_cup.runtime.Symbol;
 %public
 L=[a-zA-Z_]+
 D=[0-9]+
-espacio=[ ,\t,\r,\n]+
+espacio=[" ",\t,\r,\n]+
 %{
     private Symbol symbol(int type, Object value){
       return new Symbol(type, yyline, yycolumn, value);

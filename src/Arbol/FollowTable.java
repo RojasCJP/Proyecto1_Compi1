@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class FollowTable {
 
     public void append(int numNode, String lexeme, ArrayList flwList, ArrayList<ArrayList> table) {
-        for (ArrayList item : table) {
-            if ((int) item.get(0) == numNode && item.get(1) == lexeme) {
-                for (Object flwItem : flwList) {
-                    if (!((ArrayList) item.get(2)).contains((int) flwItem)) {
-                        ((ArrayList) item.get(2)).add(flwItem);
+        for (ArrayList item : table){
+            if( (int) item.get(0) == numNode && item.get(1) == lexeme ){
+                for (Object flwItem : flwList){
+                    if(! ((ArrayList)item.get(2)).contains((int)flwItem) ){
+                        ((ArrayList)item.get(2)).add(flwItem);
                     }
                 }
                 return;

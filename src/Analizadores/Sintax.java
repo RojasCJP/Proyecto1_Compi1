@@ -340,7 +340,7 @@ class CUP$Sintax$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top-1)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top-1)).right;
 		Nodo a = (Nodo)((java_cup.runtime.Symbol) CUP$Sintax$stack.elementAt(CUP$Sintax$top-1)).value;
-		System.out.println("El valor de la expresión es: "+a.notacionPolaca());
+		System.out.println("El valor de la expresión es: "+a.getValue());
     System.out.println("La expresion regular es: " + a.getValorNodo());
                         if (a != null) {
            meVaAServir.add(a);

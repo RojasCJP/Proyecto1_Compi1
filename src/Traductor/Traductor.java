@@ -83,4 +83,21 @@ public class Traductor {
         }
         return separado;
     }
+
+    public int numeroDeExpresiones() {
+        int       numero;
+        ArrayList separado = separador();
+        for (int i = 0; i < separado.size(); i++) {
+            separado.remove(".");
+            separado.remove("|");
+            separado.remove("*");
+            separado.remove("+");
+            separado.remove("?");
+            separado.remove("{");
+            separado.remove("}");
+            separado.remove(";");
+        }
+        numero = separado.size();
+        return numero;
+    }
 }
