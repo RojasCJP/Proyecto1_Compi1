@@ -12,7 +12,7 @@ public class GraficadorArbol {
     String graph = "digraph structs {\n" +
             "    node [shape=record];";
 
-    public String cuerpoGraphviz(ArrayList paraGraficar) {
+    public String cuerpoArchivo(ArrayList paraGraficar) {
         for (Object nodo : paraGraficar) {
             for (Object hoja : (ArrayList) nodo) {
                 NodoMetodo hojaUtil = (NodoMetodo) hoja;
@@ -82,42 +82,33 @@ public class GraficadorArbol {
         return (graph);
     }
 
-    public String crearDot(String cuerpo) {
-        String      nombre      = "";
-        int         contador    = 0;
-        FileWriter  fileWriter  = null;
-        PrintWriter printWriter = null;
-        File        imagen      = new File("src/Imagenes/ARBOLES_201900289/arbol" + contador + ".png");
+    public void crearDot(String cuerpo) {
+        FileWriter  fichero  = null;
+        PrintWriter pw       = null;
+        int         contador = 0;
+        File        dot      = new File("src/Graphviz/Arbol" + contador + ".dot");
+        while (dot.exists()) {
+            contador++;
+            dot = new File("src/Graphviz/Arbol" + contador + ".dot");
+        }
         try {
-            while (imagen.exists()) {
-                contador++;
-                imagen = new File("src/Imagenes/ARBOLES_201900289/arbol" + contador+".png");
-            }
-            fileWriter = new FileWriter("src/Graphviz/Arbol"+contador+".dot");
-            printWriter = new PrintWriter(fileWriter);
-            printWriter.println(cuerpo);
-            String nombreImagen = imagen.getName();
-            String comando      = "dot.exe -Tpng src/Graphviz/Arbol.dot -o src/Imagenes/ARBOLES_201900289/" + nombreImagen;
-//            try{
-//                Runtime.getRuntime().exec(comando);
-//            }catch (IOException e){
-//                System.out.println(e);
-//            }
-
+            fichero = new FileWriter("src/Graphviz/Arbol" + contador + ".dot");
+            pw = new PrintWriter(fichero);
+            pw.println(cuerpo);
+            fichero.close();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                // Nuevamente aprovechamos el finally para
-                // asegurarnos que se cierra el fileWriter.
-                if (null != fileWriter)
-                    fileWriter.close();
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
         }
+        try {
+            File file = new File("src/Graphviz/Arbol" + contador + ".dot");
+            if (file.exists()) {
+                String  comando = "dot.exe -Tpng src/Graphviz/Arbol" + contador + ".dot -o src/Imagenes/ARBOLES_201900289/Arbol" + contador + ".jpg";
+                Process process = Runtime.getRuntime().exec(comando);
 
-
-        return nombre;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        System.out.println(cuerpo);
     }
 }

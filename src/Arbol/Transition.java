@@ -1,5 +1,11 @@
 package Arbol;
 
+import Graficador.GraficadorAFD;
+import Graficador.GraficadorTablas;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Transition {
     //codigo visto en clase
     public String estadoInicial;
@@ -18,6 +24,14 @@ public class Transition {
 
     @Override
     public String toString() {
-        return this.estadoInicial + "=>" + this.transicion + "=>" + this.estadoFinal;
+        if(GraficadorTablas.transiciones.get(this.estadoInicial)==null){
+        Map valores = new HashMap();
+        valores.put(this.transicion, this.estadoFinal);
+        GraficadorTablas.transiciones.put(this.estadoInicial, valores);
+        }else{
+            ((HashMap)GraficadorTablas.transiciones.get(this.estadoInicial)).put(this.transicion,this.estadoFinal);
+        }
+        GraficadorAFD.cuerpo += this.estadoInicial + "->" + this.estadoFinal + "[label=\"" + this.transicion.replaceAll("\"", "") + "\"];\n";
+        return this.estadoInicial + "->" + this.transicion + "->" + this.estadoFinal;
     }
 }

@@ -1,5 +1,6 @@
 package Arbol;
 
+import Graficador.GraficadorAFD;
 import com.sun.javafx.tk.FontLoader;
 
 import java.util.ArrayList;
@@ -83,8 +84,9 @@ public class TransitionTable {
                 transicion += t.toString() + ",";
             }
             transicion += "]";
-            transicion = transicion.replace(", ]", "]");
+            transicion = transicion.replaceAll(",]", "]");
             System.out.println(estado.get(0) + " " + estado.get(1) + " " + transicion + " " + estado.get(3));
+            GraficadorAFD.estados.put(estado.get(0).toString(),estado.get(3).toString());
         }
     }
 }

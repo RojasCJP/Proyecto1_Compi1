@@ -43,7 +43,7 @@
             <Button layoutX="972.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#imagenSiguiente" text="Siguiente" />
             <Label layoutX="36.0" layoutY="426.0" text="Salida" />
             <TextArea fx:id="Salida" layoutX="36.0" layoutY="454.0" prefHeight="200.0" prefWidth="1002.0" />
-            <TreeView fx:id="Archivos" layoutX="354.0" layoutY="32.0" prefHeight="393.0" prefWidth="200.0" />
+            <TreeView fx:id="Archivos" layoutX="354.0" layoutY="32.0" onMouseEntered="#refrescarTreeView" prefHeight="393.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
    </children>

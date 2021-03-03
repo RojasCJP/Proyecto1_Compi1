@@ -19,10 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.StringReader;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -59,9 +56,15 @@ public class Controller {
             ArrayList resultadoLexico = analizarLexico();
             //este arraylist tiene datos importantes del analizador lexico revisarlo si se necesita algo
             analizarSintactico();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void refrescarTreeView(MouseEvent event) {
+        this.tree = false;
     }
 
     @FXML

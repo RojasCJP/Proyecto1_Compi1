@@ -1,6 +1,8 @@
 package Arbol;
 
+import Graficador.GraficadorAFD;
 import Graficador.GraficadorArbol;
+import Graficador.GraficadorTablas;
 
 import java.util.ArrayList;
 
@@ -24,13 +26,17 @@ public class Metodo {
         this.regex = "." + this.regex + "#";
         Tree       tree = new Tree(this.regex, this.leaves, this.table);
         NodoMetodo root = tree.getRoot();
+
         //todo tengo que ponerle el nombre a la estructura como nodo nada mas, para que me de el puntero del objeto
+
         root.getNodo();
+
         ArrayList paraGraficar = root.nodosNecesarios;
         root.graficarArbol();
-        GraficadorArbol graficador     = new GraficadorArbol();
-        String          cuerpoGraphviz = graficador.cuerpoGraphviz(paraGraficar);
-        graficador.crearDot(cuerpoGraphviz);
+        GraficadorArbol graficadorArbol     = new GraficadorArbol();
+        String          cuerpoGraphviz = graficadorArbol.cuerpoArchivo(paraGraficar);
+        graficadorArbol.crearDot(cuerpoGraphviz);
+
         root.follow();
         System.out.println("----------------------------------------------------------------TABLA DE SIGUIENTES----------------------------------------------------------------");
         FollowTable followTable = new FollowTable();
@@ -38,7 +44,16 @@ public class Metodo {
         TransitionTable transitionTable = new TransitionTable(root, table, leaves);
         System.out.println("----------------------------------------------------------------TABLA DE TRANSICIONES----------------------------------------------------------------");
         transitionTable.imprimirTabla();
+        GraficadorTablas tablaSiguientes = new GraficadorTablas();
+        tablaSiguientes.crearTablaSiguientes();
+        tablaSiguientes.crearDotSiguientes();
         root.nodosNecesarios = new ArrayList();
+        GraficadorAFD graficadorAFD = new GraficadorAFD();
+        graficadorAFD.crearAFD();
+        graficadorAFD.crearDot();
+        GraficadorTablas tablaTransiciones = new GraficadorTablas();
+        tablaTransiciones.crearTablaTransiciones();
+        tablaTransiciones.crearDotTransiciones();
     }
 
 }

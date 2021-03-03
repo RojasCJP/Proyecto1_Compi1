@@ -1,5 +1,7 @@
 package Arbol;
 
+import Graficador.GraficadorTablas;
+
 import java.util.ArrayList;
 
 public class FollowTable {
@@ -39,6 +41,11 @@ public class FollowTable {
 
     public void printTable(ArrayList<ArrayList> table) {
         for (ArrayList item : table) {
+            GraficadorTablas.cuerpoSiguientes +="<tr>";
+            GraficadorTablas.cuerpoSiguientes +="<td>"+item.get(0)+"</td>";
+            GraficadorTablas.cuerpoSiguientes +="<td>"+item.get(1)+"</td>";
+            GraficadorTablas.cuerpoSiguientes +="<td>"+item.get(2)+"</td>";
+            GraficadorTablas.cuerpoSiguientes +="</tr>";
             System.out.println(item.get(0) + " - " + item.get(1) + " - " + item.get(2));
         }
     }
