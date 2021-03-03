@@ -51,4 +51,47 @@ class TraductorTest {
         assertEquals(array, resultado);
     }
 
+    @Test
+    public void separador2() {
+        Traductor test = new Traductor();
+        test.setEntrada(". {digito} * | \"_\" | \"letra\" \"digito\";");
+        ArrayList<String> array = new ArrayList<String>();
+        array.add(".");
+        array.add("digito");
+        array.add("*");
+        array.add("|");
+        array.add("\"_\"");
+        array.add("|");
+        array.add("\"letra\"");
+        array.add("\"digito\"");
+        array.add(";");
+        ArrayList<String> resultado = test.separador();
+        System.out.println(resultado);
+        assertEquals(array, resultado);
+    }
+
+    @Test
+    public void separador3() {
+        Traductor test = new Traductor();
+        test.setEntrada(". \\' . + | | | | \\n {minus} {mayus} {digito} \" \" \\'");
+        ArrayList<String> array = new ArrayList<String>();
+        array.add(".");
+        array.add("\\'");
+        array.add(".");
+        array.add("+");
+        array.add("|");
+        array.add("|");
+        array.add("|");
+        array.add("|");
+        array.add("\\n");
+        array.add("minus");
+        array.add("mayus");
+        array.add("digito");
+        array.add("\" \"");
+        array.add("\\'");
+        ArrayList<String> resultado = test.separador();
+        System.out.println(resultado);
+        assertEquals(array, resultado);
+    }
+
 }

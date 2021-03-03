@@ -21,5 +21,6 @@ public enum Tokens {
     Linea,
     Cadena,
     Asignacion,
+    Especial,
     ERROR
 }

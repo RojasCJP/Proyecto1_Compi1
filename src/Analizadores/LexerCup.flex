@@ -11,7 +11,8 @@ import java_cup.runtime.Symbol;
 %public
 L=[a-zA-Z_]+
 D=[0-9]+
-espacio=[" ",\t,\r,\n]+
+espacio=[" ",\t,\r, \n]+
+especial=[\\n,\\\",\\\']
 %{
     private Symbol symbol(int type, Object value){
       return new Symbol(type, yyline, yycolumn, value);
@@ -24,6 +25,8 @@ espacio=[" ",\t,\r,\n]+
 CONJ {return new Symbol(sym.CONJ, yycolumn, yyline, yytext());}
 {espacio} {/*Ignore*/}
 ("//"(.)*) {/*Ignore*/}
+"\n" {return new Symbol(sym.Linea, yycolumn, yyline, yytext());}
+{especial} {return new Symbol(sym.Especial, yycolumn, yyline, yytext());}
 ("{") {return new Symbol(sym.Llave_Abre, yycolumn, yyline, yytext());}
 ("}") {return new Symbol(sym.Llave_Cierra, yycolumn, yyline, yytext());}
 ((.)"~"(.)) {return new Symbol(sym.Guion, yycolumn, yyline, yytext());}
@@ -38,9 +41,9 @@ CONJ {return new Symbol(sym.CONJ, yycolumn, yyline, yytext());}
 ("<!") {return new Symbol(sym.Comentario_Multi_Abre, yycolumn, yyline, yytext());}
 ("!>") {return new Symbol(sym.Comentario_Multi_Cierra, yycolumn, yyline, yytext());}
 ("%") {return new Symbol(sym.Porcentaje, yycolumn, yyline, yytext());}
-("->") {return new Symbol(sym.Asignacion, yycolumn, yyline, yytext());}
-("'"(.)*"'") {return new Symbol(sym.Cadena, yycolumn, yyline, yytext());}
-("\""(.)*"\"") {return new Symbol(sym.Cadena, yycolumn, yyline, yytext());}
+("-"{espacio}*">") {return new Symbol(sym.Asignacion, yycolumn, yyline, yytext());}
+("'"[^\']*"'") {return new Symbol(sym.Cadena, yycolumn, yyline, yytext());}
+("\""[^\"]*"\"") {return new Symbol(sym.Cadena, yycolumn, yyline, yytext());}
 {L}({L}|{D})* {return new Symbol(sym.Identificador, yycolumn, yyline, yytext());}
 ("(-"{D}+")")|{D}+ {return new Symbol(sym.Numero, yycolumn, yyline, yytext());}
- . {System.out.println("error aqui");}
+ . {System.out.println("error aqui"); return new Symbol(sym.ERROR,yycolumn,yyline);}

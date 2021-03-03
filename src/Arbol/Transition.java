@@ -31,7 +31,11 @@ public class Transition {
         }else{
             ((HashMap)GraficadorTablas.transiciones.get(this.estadoInicial)).put(this.transicion,this.estadoFinal);
         }
+        if(this.transicion.equals("\\\"")){
+        GraficadorAFD.cuerpo += this.estadoInicial + "->" + this.estadoFinal + "[label=\"" + this.transicion + "\"];\n";
+        }else{
         GraficadorAFD.cuerpo += this.estadoInicial + "->" + this.estadoFinal + "[label=\"" + this.transicion.replaceAll("\"", "") + "\"];\n";
+        }
         return this.estadoInicial + "->" + this.transicion + "->" + this.estadoFinal;
     }
 }

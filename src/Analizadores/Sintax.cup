@@ -37,6 +37,7 @@ terminal Comentario_Multi_Cierra;
 terminal Porcentaje;
 terminal Linea;
 terminal String Cadena;
+terminal String Especial;
 terminal Asignacion;
 terminal ERROR;
 
@@ -65,7 +66,7 @@ CONTENIDO ::=
     CONTENIDO PORCENTAJES |
     PORCENTAJES |
     CONTENIDO error Punto_Coma|
-    error Punto_Coma
+    ERROR Punto_Coma
 ;
 
 GRUPO ::=
@@ -92,7 +93,9 @@ REGEX ::=
     Suma REGEX:a {:RESULT=new Nodo("+",a,null);:}|
     Interrogacion REGEX:a {:RESULT=new Nodo("?",a,null);:}|
     Cadena:a {:RESULT=new Nodo(a,null,null);:} |
+    Especial:a {:RESULT=new Nodo(a,null,null);:} |
     GRUPO:a {:RESULT=new Nodo(a,null,null);:}
+
 ;
 
 DECLARACION_CONJUNTOS ::=

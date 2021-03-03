@@ -27,7 +27,11 @@ public class GraficadorArbol {
                     if (hojaUtil.lexema.replaceAll("\"", "").equals("|")) {
                         graph += "\\" + hojaUtil.lexema.replaceAll("\"", "");//es el valor String del nodo
                     } else {
-                        graph += hojaUtil.lexema.replaceAll("\"", "");//es el valor String del nodo
+                        if (hojaUtil.lexema.equals("\\\"")) {
+                            graph += hojaUtil.lexema;//es el valor String del nodo
+                        } else {
+                            graph += hojaUtil.lexema.replaceAll("\"", "");//es el valor String del nodo
+                        }
                     }
                     graph += "}|";
                     graph += hojaUtil.numero;//este es el id del numero

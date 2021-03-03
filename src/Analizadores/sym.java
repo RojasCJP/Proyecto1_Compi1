@@ -9,10 +9,11 @@ package Analizadores;
 public class sym {
   /* terminals */
   public static final int Comentario_Multi_Cierra = 17;
+  public static final int Especial = 21;
   public static final int Punto_Coma = 10;
   public static final int Suma = 14;
   public static final int Numero = 4;
-  public static final int ERROR = 22;
+  public static final int ERROR = 23;
   public static final int Identificador = 3;
   public static final int Asterizco = 13;
   public static final int Coma = 9;
@@ -27,7 +28,7 @@ public class sym {
   public static final int Dos_Puntos = 11;
   public static final int Guion = 7;
   public static final int Punto = 8;
-  public static final int Asignacion = 21;
+  public static final int Asignacion = 22;
   public static final int Comentario_Multi_Abre = 16;
   public static final int Llave_Cierra = 6;
   public static final int Llave_Abre = 5;
@@ -53,6 +54,7 @@ public class sym {
   "Porcentaje",
   "Linea",
   "Cadena",
+  "Especial",
   "Asignacion",
   "ERROR"
   };

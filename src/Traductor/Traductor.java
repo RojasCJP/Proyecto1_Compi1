@@ -20,6 +20,7 @@ public class Traductor {
         operadores[6] = '}';
         operadores[7] = ';';
         operadores[8] = '#';
+//        operadores[9] = '\\';
 //        operadores[9] = '\"';
 //        operadores[10] = '\'';
     }
@@ -49,10 +50,11 @@ public class Traductor {
         return false;
     }
 
-    public ArrayList<String> separador() {
+    public ArrayList<String> separador2() {
         ArrayList<String> separado      = new ArrayList<String>();
         String            identificador = "";
         boolean           cadena        = true;
+        boolean           especial      = false;
         for (int i = 0; i < entrada.length(); i++) {
             if (entrada.charAt(i) != ' ' && entrada.charAt(i) != '\n' && entrada.charAt(i) != '\t' && entrada.charAt(i) != '\r') {
                 if (inOperadores(entrada.charAt(i))) {
@@ -63,18 +65,70 @@ public class Traductor {
                         }
                         separado.add(Character.toString(entrada.charAt(i)));
                     } else {
+                        if (entrada.charAt(i + 1) == '\'' && entrada.charAt(i) == '\\') {
+                            identificador += entrada.charAt(i) + entrada.charAt(i + 1);
+                            i++;
+                            especial = true;
+                        }
                         identificador += entrada.charAt(i);
                     }
                 } else {
                     if ((entrada.charAt(i) == '\"' || entrada.charAt(i) == '\'') && cadena) {
                         cadena = false;
                     } else if ((entrada.charAt(i) == '\"' || entrada.charAt(i) == '\'') && !cadena) {
+                        identificador += entrada.charAt(i);
                         cadena = true;
+                        separado.add(identificador);
+                        identificador = "";
                     }
                     identificador += entrada.charAt(i);
+                    if (cadena && identificador.equals("\"")) {
+                        identificador = "";
+                    }
                 }
             }
         }
+        for (int i = 0; i < separado.size(); i++) {
+            separado.remove("{");
+            separado.remove("}");
+            separado.remove("\"");
+            separado.remove("\'");
+        }
+        return separado;
+    }
+
+    public ArrayList<String> separador() {
+        ArrayList separado      = new ArrayList();
+        String    identificador = "";
+        String    cadena        = "";
+        boolean   cadenaBool    = false;
+        for (int i = 0; i < entrada.length(); i++) {
+            if (cadenaBool) {
+                cadena += entrada.charAt(i);
+                if (entrada.charAt(i) == '\"' || entrada.charAt(i) == '}' || entrada.charAt(i) == '\'') {
+                    cadenaBool = false;
+                    if(cadena.charAt(0)=='{'){
+                        cadena = cadena.substring(1,cadena.length()-1);
+                    }
+                    separado.add(cadena);
+                    cadena = "";
+                }
+            } else {
+                if (entrada.charAt(i) == '\"' || entrada.charAt(i) == '{' || entrada.charAt(i) == '\'') {
+                    cadenaBool = true;
+                    cadena += entrada.charAt(i);
+                }
+                if (entrada.charAt(i) == '\\') {
+                    String especial = "\\" + entrada.charAt(i + 1);
+                    i++;
+                    separado.add(especial);
+                }
+                if (inOperadores(entrada.charAt(i))) {
+                    separado.add(Character.toString(entrada.charAt(i)));
+                }
+            }
+        }
+
         for (int i = 0; i < separado.size(); i++) {
             separado.remove("{");
             separado.remove("}");

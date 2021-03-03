@@ -1,0 +1,14 @@
+digraph {
+
+  tbl [
+
+    shape=plaintext
+    label=<
+      <table border='0' cellborder='1' color='blue' cellspacing='0'>
+        <tr><td>Numero Hoja</td><td>Hoja Cadena</td><td>Siguientes</td></tr><tr><td>3</td><td>digito</td><td>[3, 4]</td></tr><tr><td>2</td><td>"."</td><td>[3]</td></tr><tr><td>1</td><td>digito</td><td>[2]</td></tr><tr><td>5</td><td>#</td><td></td></tr>
+
+      </table>
+
+    >];
+
+}
