@@ -5,7 +5,7 @@ digraph {
     shape=plaintext
     label=<
       <table border='0' cellborder='1' color='blue' cellspacing='0'>
-<tr><td>Estado</td><td>\'</td><td>minus</td><td>" "</td><td>\"</td><td>mayus</td><td>digito</td></tr>
+<tr><td>Estado</td><td>\'</td><td>minus</td><td>\n</td><td>" "</td><td>mayus</td><td>digito</td></tr>
 <tr><td>S0</td><td>S1</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td></tr>
 <tr><td>S1</td><td>null</td><td>S2</td><td>S2</td><td>S2</td><td>S2</td><td>S2</td></tr>
 <tr><td>S2</td><td>S3</td><td>S2</td><td>S2</td><td>S2</td><td>S2</td><td>S2</td></tr>

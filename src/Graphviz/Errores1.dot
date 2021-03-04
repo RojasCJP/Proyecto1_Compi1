@@ -4,7 +4,8 @@ digraph {
 
     shape=plaintext
     label=<
-      <table border='0' cellborder='1' color='blue' cellspacing='0'></table>
+      <table border='0' cellborder='1' color='blue' cellspacing='0'>
+        <tr><td>#</td><td>Tipo de error</td><td>Descripcion</td><td>Linea</td><td>Columna</td></tr></table>
 
     >];
 

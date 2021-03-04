@@ -24,7 +24,7 @@
             </MenuButton>
             <Label layoutX="36.0" layoutY="123.0" text="Archivo de Entrada" />
             <TextArea fx:id="Entrada" layoutX="36.0" layoutY="140.0" prefHeight="197.0" prefWidth="300.0" />
-            <Button layoutX="36.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#generarAutomata" text="Generar Automata" />
+            <Button layoutX="36.0" layoutY="379.0" mnemonicParsing="false" onAction="#generarMethod" text="Generar Automata" />
             <Button layoutX="160.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#analizarEntradas" text="Analizar Entradas" />
             <MenuButton fx:id="MenuImagen" layoutX="590.0" layoutY="36.0" mnemonicParsing="false" text="Ver imagenes">
               <items>

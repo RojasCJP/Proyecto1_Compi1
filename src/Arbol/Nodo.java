@@ -1,5 +1,9 @@
 package Arbol;
 
+import Graficador.GraficadorThompson;
+
+import java.util.ArrayList;
+
 public class Nodo {
 
     String value;
@@ -36,6 +40,23 @@ public class Nodo {
             String valorIzquierdo = this.izquierdo.notacionPolaca();
             String valorDerecho   = this.derecho.notacionPolaca();
             return this.value + valorIzquierdo + valorDerecho;
+        }
+        return "ocurrio un error";
+    }
+
+    public String paraThompson() {
+        if ((this.izquierdo == null) && (this.derecho == null)) {
+            GraficadorThompson.operaciones.add(this);
+            return this.value;
+        } else if ((this.izquierdo != null) && (this.derecho == null)) {
+            String valorIzquierdo = this.izquierdo.paraThompson();
+            GraficadorThompson.operaciones.add(this);
+            return "(" + valorIzquierdo + this.value + ")";
+        } else if ((this.izquierdo != null) && (this.derecho != null)) {
+            String valorIzquierdo = this.izquierdo.paraThompson();
+            String valorDerecho   = this.derecho.paraThompson();
+            GraficadorThompson.operaciones.add(this);
+            return "(" + valorIzquierdo + this.value + valorDerecho + ")";
         }
         return "ocurrio un error";
     }

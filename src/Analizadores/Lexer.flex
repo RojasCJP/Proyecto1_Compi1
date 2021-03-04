@@ -1,14 +1,18 @@
 package Analizadores;
 import static Analizadores.Tokens.*;
+import Graficador.GraficadorErrores;
 %%
 %class Lexer
 %type Tokens
+%line
+%char
+%column
 %column
 %public
 L=[a-zA-Z_]+
 D=[0-9]+
 espacio=[" ",\t,\r]+
-especial=[\\n,\\\",\\\']
+especial=[\\n,\\\",\\\']+
 %{
     public String lexeme;
 %}
@@ -37,5 +41,5 @@ especial=[\\n,\\\",\\\']
 ("\""[^\"]*"\"") {lexeme=yytext(); return Cadena;}
 {L}({L}|{D})* {lexeme=yytext(); return Identificador;}
 ("(-"{D}+")")|{D}+ {lexeme=yytext(); return Numero;}
- . {System.out.println("error aqui"); return ERROR;}
+ . {System.out.println("error aqui"); GraficadorErrores.errores += "<tr><td>" + GraficadorErrores.contador + "</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>" + yyline + "</td><td>" + yycolumn + "</td></tr>\n";GraficadorErrores.contador++;}
       //todo admitir demas caracteres

@@ -1,5 +1,6 @@
 package Analizadores;
 import java_cup.runtime.Symbol;
+import Graficador.GraficadorErrores;
 %%
 %class LexerCup
 %type java_cup.runtime.Symbol
@@ -12,7 +13,7 @@ import java_cup.runtime.Symbol;
 L=[a-zA-Z_]+
 D=[0-9]+
 espacio=[" ",\t,\r, \n]+
-especial=[\\n,\\\",\\\']
+especial=[\\n,\\\",\\\']+
 %{
     private Symbol symbol(int type, Object value){
       return new Symbol(type, yyline, yycolumn, value);
@@ -46,4 +47,4 @@ CONJ {return new Symbol(sym.CONJ, yycolumn, yyline, yytext());}
 ("\""[^\"]*"\"") {return new Symbol(sym.Cadena, yycolumn, yyline, yytext());}
 {L}({L}|{D})* {return new Symbol(sym.Identificador, yycolumn, yyline, yytext());}
 ("(-"{D}+")")|{D}+ {return new Symbol(sym.Numero, yycolumn, yyline, yytext());}
- . {System.out.println("error aqui"); return new Symbol(sym.ERROR,yycolumn,yyline);}
+ . {System.out.println("error aqui"); GraficadorErrores.errores += "<tr><td>" + GraficadorErrores.contador + "</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>" + yyline + "</td><td>" + yycolumn + "</td></tr>\n";GraficadorErrores.contador++;}
