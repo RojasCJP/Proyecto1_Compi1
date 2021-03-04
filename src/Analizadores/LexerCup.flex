@@ -39,8 +39,7 @@ CONJ {return new Symbol(sym.CONJ, yycolumn, yyline, yytext());}
 ("*") {return new Symbol(sym.Asterizco, yycolumn, yyline, yytext());}
 ("+") {return new Symbol(sym.Suma, yycolumn, yyline, yytext());}
 ("?") {return new Symbol(sym.Interrogacion, yycolumn, yyline, yytext());}
-("<!") {return new Symbol(sym.Comentario_Multi_Abre, yycolumn, yyline, yytext());}
-("!>") {return new Symbol(sym.Comentario_Multi_Cierra, yycolumn, yyline, yytext());}
+("<!"(.|{espacio})*"!>") {/*ignore*/}
 ("%") {return new Symbol(sym.Porcentaje, yycolumn, yyline, yytext());}
 ("-"{espacio}*">") {return new Symbol(sym.Asignacion, yycolumn, yyline, yytext());}
 ("'"[^\']*"'") {return new Symbol(sym.Cadena, yycolumn, yyline, yytext());}

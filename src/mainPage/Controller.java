@@ -16,11 +16,13 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -40,10 +42,76 @@ public class Controller {
     @FXML
     private TextArea   Salida;
 
-    private static boolean     menus = false;
-    private static boolean     tree  = false;
+    private static boolean     menus          = false;
+    private static boolean     tree           = false;
     private        FileChooser fileChooser;
     private        Stage       stage;
+    private        File        carpetaImagenesAcutales;
+    private        File[]      listaImagenes;
+    private        int         contadorImagen = 0;
+
+    @FXML
+    public void imagenesAFD(ActionEvent event) {
+        carpetaImagenesAcutales = new File("src/Imagenes/AFD_201900289");
+        listaImagenes = new File[carpetaImagenesAcutales.listFiles().length];
+        listaImagenes = carpetaImagenesAcutales.listFiles();
+        Image image = new Image(listaImagenes[0].toURI().toString());
+        imagenes.setImage(image);
+    }
+
+    @FXML
+    public void imagenesAFND(ActionEvent event) {
+        carpetaImagenesAcutales = new File("src/Imagenes/AFND_201900289");
+        listaImagenes = new File[carpetaImagenesAcutales.listFiles().length];
+        listaImagenes = carpetaImagenesAcutales.listFiles();
+        Image image = new Image(listaImagenes[0].toURI().toString());
+        imagenes.setImage(image);
+    }
+
+    @FXML
+    public void imagenesArboles(ActionEvent event) {
+        carpetaImagenesAcutales = new File("src/Imagenes/ARBOLES_201900289");
+        listaImagenes = new File[carpetaImagenesAcutales.listFiles().length];
+        listaImagenes = carpetaImagenesAcutales.listFiles();
+        Image image = new Image(listaImagenes[0].toURI().toString());
+        imagenes.setImage(image);
+    }
+
+    @FXML
+    public void imagenesErrores(ActionEvent event) {
+        carpetaImagenesAcutales = new File("src/Imagenes/ERRORES_201900289");
+        listaImagenes = new File[carpetaImagenesAcutales.listFiles().length];
+        listaImagenes = carpetaImagenesAcutales.listFiles();
+        Image image = new Image(listaImagenes[0].toURI().toString());
+        imagenes.setImage(image);
+    }
+
+    @FXML
+    public void imagenesSalidas(ActionEvent event) {
+        carpetaImagenesAcutales = new File("src/Imagenes/SALIDAS_201900289");
+        listaImagenes = new File[carpetaImagenesAcutales.listFiles().length];
+        listaImagenes = carpetaImagenesAcutales.listFiles();
+        Image image = new Image(listaImagenes[0].toURI().toString());
+        imagenes.setImage(image);
+    }
+
+    @FXML
+    public void imagenesSiguientes(ActionEvent event) {
+        carpetaImagenesAcutales = new File("src/Imagenes/SIGUIENTES_201900289");
+        listaImagenes = new File[carpetaImagenesAcutales.listFiles().length];
+        listaImagenes = carpetaImagenesAcutales.listFiles();
+        Image image = new Image(listaImagenes[0].toURI().toString());
+        imagenes.setImage(image);
+    }
+
+    @FXML
+    public void imagenesTransiciones(ActionEvent event) {
+        carpetaImagenesAcutales = new File("src/Imagenes/TRANSICIONES_201900289");
+        listaImagenes = new File[carpetaImagenesAcutales.listFiles().length];
+        listaImagenes = carpetaImagenesAcutales.listFiles();
+        Image image = new Image(listaImagenes[0].toURI().toString());
+        imagenes.setImage(image);
+    }
 
     @FXML
     public void inicializar(MouseEvent event) {
@@ -72,12 +140,24 @@ public class Controller {
 
     @FXML
     public void imagenAnterior(MouseEvent event) {
-        this.Salida.setText("pasa a la imagen anterior");
+        Image image = new Image(listaImagenes[contadorImagen].toURI().toString());
+        imagenes.setImage(image);
+        if (contadorImagen <= 0) {
+            contadorImagen = listaImagenes.length-1;
+        } else {
+            contadorImagen--;
+        }
     }
 
     @FXML
     public void imagenSiguiente(MouseEvent event) {
-        this.Salida.setText("pasa a la siguiente imagen");
+        Image image = new Image(listaImagenes[contadorImagen].toURI().toString());
+        imagenes.setImage(image);
+        if (contadorImagen >= listaImagenes.length-1) {
+            contadorImagen = 0;
+        } else {
+            contadorImagen++;
+        }
     }
 
     @FXML
@@ -260,6 +340,7 @@ public class Controller {
                 case Comentario_Multi_Abre:
                     resultado += "\t\t>>Comienza un Comentario\t\t" + lexer.lexeme + "\n";
                     columna += lexer.lexeme.length();
+                    //todo hacer que funcionen los comentarios multilinea
                     break;
                 case Comentario_Multi_Cierra:
                     resultado += "\t\t>>Termina un Comentario\t\t" + lexer.lexeme + "\n";
@@ -449,16 +530,16 @@ public class Controller {
             GraficadorErrores.errores += "<tr><td>" + GraficadorErrores.contador + "</td><td>Sintactico</td><td>El caracter " + syms.value + " no se esperaba</td><td>" + syms.right + "</td><td>" + syms.left + "</td></tr>\n";
             GraficadorErrores.contador++;
         }
-            expresionesRegulares = sintax.meVaAServir;
-            for (int i = 0; i < expresionesRegulares.size(); i++) {
-                Metodo metodo      = new Metodo();
-                Nodo   nodo        = (Nodo) expresionesRegulares.get(i);
-                GraficadorThompson graficadorThompson = new GraficadorThompson(nodo);
-                graficadorThompson.crearDot();
-                String regexPolaca = nodo.notacionPolaca();
-                metodo.setRegex(regexPolaca);
-                metodo.metodoArbol();
-            }
+        expresionesRegulares = sintax.meVaAServir;
+        for (int i = 0; i < expresionesRegulares.size(); i++) {
+            Metodo             metodo             = new Metodo();
+            Nodo               nodo               = (Nodo) expresionesRegulares.get(i);
+            GraficadorThompson graficadorThompson = new GraficadorThompson(nodo);
+            graficadorThompson.crearDot();
+            String regexPolaca = nodo.notacionPolaca();
+            metodo.setRegex(regexPolaca);
+            metodo.metodoArbol();
+        }
         Salida.setText(resultado);
     }
 }

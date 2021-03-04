@@ -1,0 +1,13 @@
+digraph {
+
+  tbl [
+
+    shape=plaintext
+    label=<
+      <table border='0' cellborder='1' color='blue' cellspacing='0'>
+        <tr><td>#</td><td>Tipo de error</td><td>Descripcion</td><td>Linea</td><td>Columna</td></tr><tr><td>1</td><td>Sintactico</td><td>El caracter <! no se esperaba</td><td>0</td><td>0</td></tr>
+</table>
+
+    >];
+
+}

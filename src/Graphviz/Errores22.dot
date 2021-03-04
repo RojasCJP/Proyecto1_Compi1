@@ -1,0 +1,21 @@
+digraph {
+
+  tbl [
+
+    shape=plaintext
+    label=<
+      <table border='0' cellborder='1' color='blue' cellspacing='0'>
+        <tr><td>#</td><td>Tipo de error</td><td>Descripcion</td><td>Linea</td><td>Columna</td></tr><tr><td>1</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>2</td><td>0</td></tr>
+<tr><td>2</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>2</td><td>1</td></tr>
+<tr><td>3</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>3</td><td>13</td></tr>
+<tr><td>4</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>3</td><td>14</td></tr>
+<tr><td>5</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>2</td><td>0</td></tr>
+<tr><td>6</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>2</td><td>1</td></tr>
+<tr><td>7</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>3</td><td>13</td></tr>
+<tr><td>8</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>3</td><td>14</td></tr>
+<tr><td>9</td><td>Sintactico</td><td>El caracter como no se esperaba</td><td>2</td><td>7</td></tr>
+</table>
+
+    >];
+
+}

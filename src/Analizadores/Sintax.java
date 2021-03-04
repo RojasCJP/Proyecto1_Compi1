@@ -8,6 +8,7 @@ package Analizadores;
 import java_cup.runtime.Symbol;
 import Arbol.Nodo;
 import java.util.ArrayList;
+import Graficador.GraficadorErrores;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -172,6 +173,8 @@ public ArrayList meVaAServir = new ArrayList();
 
     public void syntax_error(Symbol s){
         this.s = s;
+        GraficadorErrores.errores += "<tr><td>" + GraficadorErrores.contador + "</td><td>Sintactico</td><td>El token encontrado no concuerda con lo esperado</td><td>" + (s.right+1) + "</td><td>" + (s.left+1) + "</td></tr>\n";
+        GraficadorErrores.contador++;
     }
 
     public Symbol getS(){

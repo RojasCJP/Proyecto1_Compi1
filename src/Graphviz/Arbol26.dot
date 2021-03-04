@@ -1,0 +1,21 @@
+digraph structs {
+    node [shape=record];ArbolNodoMetodo7f7f7bc5[label="[1]|{false|{letra}|1}|[1]"];
+ArbolNodoMetodo4e87b52a[label="[2]|{false|{_}|2}|[2]"];
+ArbolNodoMetodo6992def7[label="[3]|{false|{letra}|3}|[3]"];
+ArbolNodoMetodo244c2ba[label="[4]|{false|{digito}|4}|[4]"];
+ArbolNodoMetodo6e13064[label="[3, 4]|{false|{\|}|0}|[3, 4]"];
+ArbolNodoMetodo6e13064 -> ArbolNodoMetodo6992def7;
+ArbolNodoMetodo6e13064 -> ArbolNodoMetodo244c2ba;
+ArbolNodoMetodo75bcfb77[label="[2, 3, 4]|{false|{\|}|0}|[2, 3, 4]"];
+ArbolNodoMetodo75bcfb77 -> ArbolNodoMetodo4e87b52a;
+ArbolNodoMetodo75bcfb77 -> ArbolNodoMetodo6e13064;
+ArbolNodoMetodoa26f651[label="[2, 3, 4]|{true|{*}|0}|[2, 3, 4]"];
+ArbolNodoMetodoa26f651 -> ArbolNodoMetodo75bcfb77;
+ArbolNodoMetodo2e53a4bd[label="[1]|{false|{.}|0}|[1, 2, 3, 4]"];
+ArbolNodoMetodo2e53a4bd -> ArbolNodoMetodo7f7f7bc5;
+ArbolNodoMetodo2e53a4bd -> ArbolNodoMetodoa26f651;
+ArbolNodoMetodo213ec303[label="[5]|{false|{#}|5}|[5]"];
+ArbolNodoMetodo33cbf310[label="[1]|{false|{.}|0}|[5]"];
+ArbolNodoMetodo33cbf310 -> ArbolNodoMetodo2e53a4bd;
+ArbolNodoMetodo33cbf310 -> ArbolNodoMetodo213ec303;
+}

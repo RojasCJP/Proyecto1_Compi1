@@ -33,8 +33,7 @@ especial=[\\n,\\\",\\\']+
 ("*") {lexeme=yytext(); return Asterizco;}
 ("+") {lexeme=yytext(); return Suma;}
 ("?") {lexeme=yytext(); return Interrogacion;}
-("<!") {lexeme=yytext(); return Comentario_Multi_Abre;}
-("!>") {lexeme=yytext(); return Comentario_Multi_Cierra;}
+("<!"(.|{espacio})*"!>") {/*ignore*/}
 ("%") {lexeme=yytext(); return Porcentaje;}
 ("-"{espacio}*">") {lexeme=yytext(); return Asignacion;}
 ("'"[^\']*"'") {lexeme=yytext(); return Cadena;}

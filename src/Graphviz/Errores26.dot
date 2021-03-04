@@ -1,0 +1,14 @@
+digraph {
+
+  tbl [
+
+    shape=plaintext
+    label=<
+      <table border='0' cellborder='1' color='blue' cellspacing='0'>
+        <tr><td>#</td><td>Tipo de error</td><td>Descripcion</td><td>Linea</td><td>Columna</td></tr><tr><td>1</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>5</td><td>48</td></tr>
+<tr><td>2</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>5</td><td>48</td></tr>
+</table>
+
+    >];
+
+}
