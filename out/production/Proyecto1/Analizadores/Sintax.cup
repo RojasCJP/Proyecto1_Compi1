@@ -4,6 +4,8 @@ import java_cup.runtime.Symbol;
 import Arbol.Nodo;
 import java.util.ArrayList;
 import Graficador.GraficadorErrores;
+import Regex.Conjuntos;
+import Regex.AnalizadorRegex;
 
 parser code
 {:
@@ -26,9 +28,9 @@ terminal String Identificador;
 terminal Numero;
 terminal String Llave_Abre;
 terminal String Llave_Cierra;
-terminal Guion;
+terminal String Guion;
 terminal Punto;
-terminal Coma;
+terminal String Coma;
 terminal Punto_Coma;
 terminal Dos_Puntos;
 terminal Or;
@@ -47,6 +49,7 @@ terminal ERROR;
 non terminal PORCENTAJES;
 non terminal DECLARACION_CONJUNTOS;
 non terminal Nodo REGEX;
+non terminal String CONJUNTO;
 non terminal DECLARACION_REGEX;
 non terminal PREGUNTA_REGEX;
 non terminal String GRUPO;
@@ -77,15 +80,22 @@ GRUPO ::=
 ;
 
 PREGUNTA_REGEX ::=
-    Identificador Dos_Puntos Cadena Punto_Coma
+    Identificador:id Dos_Puntos Cadena:a Punto_Coma{:if (AnalizadorRegex.cadenas.get(id) == null) {
+                                                                 ArrayList nuevo = new ArrayList();
+                                                                 nuevo.add(a);
+                                                                 AnalizadorRegex.cadenas.put(id,nuevo);
+                                                             } else {
+                                                                 ((ArrayList)AnalizadorRegex.cadenas.get(id)).add(a);
+                                                             };:}
 ;
 
 DECLARACION_REGEX ::=
-    Identificador Asignacion REGEX:a Punto_Coma {:System.out.println("El valor de la expresión es: "+a.getValue());
+    Identificador:id Asignacion REGEX:a Punto_Coma {:System.out.println("El valor de la expresión es: "+a.getValue());
     System.out.println("La expresion regular es: " + a.getValorNodo());
                         if (a != null) {
            meVaAServir.add(a);
        }
+    AnalizadorRegex.nombres.add(id);
     :}
 ;
 
@@ -101,8 +111,14 @@ REGEX ::=
 
 ;
 
+CONJUNTO ::=
+        Coma:a CONJUNTO:b {:RESULT=b += a;:} |
+        Coma:a {:RESULT=a;:}
+;
+
 DECLARACION_CONJUNTOS ::=
-    CONJ Dos_Puntos Identificador Asignacion Guion Punto_Coma
+    CONJ Dos_Puntos Identificador:nombre Asignacion Guion:a Punto_Coma {:Conjuntos.todosConjuntos.add(new Conjuntos(nombre,a));:}|
+    CONJ Dos_Puntos Identificador:nombre Asignacion CONJUNTO:a {:Conjuntos.todosConjuntos.add(new Conjuntos(nombre,a));:}
 ;
 
 PORCENTAJES ::=

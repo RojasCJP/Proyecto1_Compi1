@@ -1,9 +1,12 @@
 package Graficador;
 
+import Regex.AnalizadorRegex;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,11 +20,16 @@ public class GraficadorAFD {
         for (Object entry : estados.entrySet()) {
             if (((Map.Entry<String, String>) entry).getValue().equals("true")) {
                 encabezado += ((Map.Entry<String, String>) entry).getKey() + ";";
+                if (AnalizadorRegex.findByName(((Map.Entry<String, String>) entry).getKey()) != null) {
+                    AnalizadorRegex.findByName(((Map.Entry<String, String>) entry).getKey()).finalAFD = true;
+                }
             }
         }
         encabezado += "\nnode [shape=circle];";
         encabezado += cuerpo;
         encabezado += "}";
+        AnalizadorRegex.todosNodos.add(AnalizadorRegex.nodos);
+        AnalizadorRegex.nodos = new ArrayList();
     }
 
     public void crearDot() {

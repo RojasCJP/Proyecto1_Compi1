@@ -5,11 +5,7 @@ digraph {
     shape=plaintext
     label=<
       <table border='0' cellborder='1' color='blue' cellspacing='0'>
-        <tr><td>#</td><td>Tipo de error</td><td>Descripcion</td><td>Linea</td><td>Columna</td></tr><tr><td>1</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>2</td><td>0</td></tr>
-<tr><td>2</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>2</td><td>1</td></tr>
-<tr><td>3</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>3</td><td>10</td></tr>
-<tr><td>4</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>3</td><td>11</td></tr>
-</table>
+        <tr><td>#</td><td>Tipo de error</td><td>Descripcion</td><td>Linea</td><td>Columna</td></tr></table>
 
     >];
 

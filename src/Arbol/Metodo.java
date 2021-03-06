@@ -16,7 +16,6 @@ public class Metodo {
         return regex;
     }
 
-    //todo tengo que setear la regex con Nodo.notacionPolaca(); y despues de eso ya puedo llamar al metodo
     public void setRegex(String regex_en_polaca) {
         this.regex = regex_en_polaca;
     }
@@ -27,7 +26,6 @@ public class Metodo {
         Tree       tree = new Tree(this.regex, this.leaves, this.table);
         NodoMetodo root = tree.getRoot();
 
-        //todo tengo que ponerle el nombre a la estructura como nodo nada mas, para que me de el puntero del objeto
 
         root.getNodo();
 

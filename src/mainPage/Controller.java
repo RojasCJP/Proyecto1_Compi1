@@ -8,6 +8,7 @@ import Arbol.Metodo;
 import Arbol.Nodo;
 import Graficador.GraficadorErrores;
 import Graficador.GraficadorThompson;
+import Regex.AnalizadorRegex;
 import java_cup.runtime.Symbol;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -340,7 +341,6 @@ public class Controller {
                 case Comentario_Multi_Abre:
                     resultado += "\t\t>>Comienza un Comentario\t\t" + lexer.lexeme + "\n";
                     columna += lexer.lexeme.length();
-                    //todo hacer que funcionen los comentarios multilinea
                     break;
                 case Comentario_Multi_Cierra:
                     resultado += "\t\t>>Termina un Comentario\t\t" + lexer.lexeme + "\n";
@@ -387,6 +387,12 @@ public class Controller {
         try {
             sintax.parse();
             resultado += "ANALISIS SINTACTICO REALIZADO CORRECTAMENTE";
+        } catch (Exception e) {
+            Symbol syms = sintax.getS();
+            resultado += "ERROR DE SINTAXIS EN LA LINEA: " + (syms.right + 1) + " COLUMNA: " + (syms.left + 1) + ", TEXTO: \"" + syms.value + "\"";
+            GraficadorErrores.errores += "<tr><td>" + GraficadorErrores.contador + "</td><td>Sintactico</td><td>El caracter " + syms.value + " no se esperaba</td><td>" + syms.right + "</td><td>" + syms.left + "</td></tr>\n";
+            GraficadorErrores.contador++;
+        }
             expresionesRegulares = sintax.meVaAServir;
             for (int i = 0; i < expresionesRegulares.size(); i++) {
                 Metodo metodo      = new Metodo();
@@ -394,13 +400,9 @@ public class Controller {
                 String regexPolaca = nodo.notacionPolaca();
                 metodo.setRegex(regexPolaca);
                 metodo.metodoArbol();
+                AnalizadorRegex analizadorRegex = new AnalizadorRegex();
+                analizadorRegex.evaluarExpresiones();
             }
-        } catch (Exception e) {
-            Symbol syms = sintax.getS();
-            resultado += "ERROR DE SINTAXIS EN LA LINEA: " + (syms.right + 1) + " COLUMNA: " + (syms.left + 1) + ", TEXTO: \"" + syms.value + "\"";
-            GraficadorErrores.errores += "<tr><td>" + GraficadorErrores.contador + "</td><td>Sintactico</td><td>El caracter " + syms.value + " no se esperaba</td><td>" + syms.right + "</td><td>" + syms.left + "</td></tr>\n";
-            GraficadorErrores.contador++;
-        }
         Salida.setText(resultado);
     }
 

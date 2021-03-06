@@ -34,12 +34,12 @@ public class Lexer {
    * Translates characters to character classes
    */
   private static final String ZZ_CMAP_PACKED = 
-    "\11\0\1\3\1\14\1\16\1\16\1\15\22\0\1\3\1\32\1\37"+
-    "\2\0\1\34\1\0\1\36\1\40\1\41\1\26\1\27\1\6\1\35"+
-    "\1\22\1\13\12\2\1\24\1\23\1\31\1\0\1\33\1\30\1\0"+
-    "\2\1\1\7\6\1\1\12\3\1\1\11\1\10\13\1\1\0\1\4"+
-    "\2\0\1\1\1\0\15\1\1\5\14\1\1\17\1\25\1\20\1\21"+
-    "\6\0\1\16\u1fa2\0\1\16\1\16\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
+    "\11\0\1\3\1\12\1\14\1\14\1\13\22\0\1\3\1\35\1\16"+
+    "\2\0\1\37\1\0\1\17\1\41\1\24\1\31\1\32\1\26\1\40"+
+    "\1\23\1\11\12\2\1\27\1\25\1\34\1\0\1\36\1\33\1\0"+
+    "\2\1\1\5\6\1\1\10\3\1\1\7\1\6\13\1\1\0\1\4"+
+    "\2\0\1\1\1\0\15\1\1\15\14\1\1\20\1\30\1\21\1\22"+
+    "\6\0\1\14\u1fa2\0\1\14\1\14\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
 
   /** 
    * Translates characters to character classes
@@ -52,15 +52,16 @@ public class Lexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\3\1\4\2\5\1\4\1\2"+
-    "\1\1\1\6\1\4\1\7\1\10\1\11\1\12\1\13"+
-    "\1\14\1\15\1\16\1\17\1\1\1\20\1\1\2\5"+
-    "\1\1\1\0\1\2\1\3\2\5\1\4\1\2\1\4"+
-    "\2\0\1\21\1\0\1\5\2\0\1\5\2\0\1\22"+
-    "\1\2\1\0\1\23\2\22\1\0\1\24\1\25\1\3";
+    "\1\0\1\1\1\2\1\3\1\4\1\1\1\2\1\1"+
+    "\1\5\1\4\1\0\1\2\2\1\1\6\1\7\1\10"+
+    "\1\1\1\11\1\12\1\13\1\14\1\15\1\16\1\1"+
+    "\1\17\2\1\1\0\1\20\1\2\1\3\1\4\1\0"+
+    "\1\21\1\2\1\4\2\0\1\22\5\0\1\20\1\23"+
+    "\1\0\1\24\1\2\1\22\3\24\2\0\1\25\1\26"+
+    "\1\3";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[55];
+    int [] result = new int[59];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -86,15 +87,16 @@ public class Lexer {
 
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\42\0\104\0\146\0\210\0\252\0\314\0\356"+
-    "\0\u0110\0\u0132\0\u0154\0\u0176\0\42\0\42\0\42\0\42"+
-    "\0\42\0\42\0\42\0\42\0\42\0\u0198\0\42\0\u01ba"+
-    "\0\u01dc\0\u01fe\0\u0220\0\u0242\0\u0264\0\u0286\0\u02a8\0\u02ca"+
-    "\0\u02ec\0\u030e\0\u0330\0\u0352\0\u0374\0\u0154\0\u0396\0\u03b8"+
-    "\0\u03da\0\u03fc\0\u041e\0\u0440\0\u0462\0\u0154\0\u0484\0\u04a6"+
-    "\0\u0154\0\u0396\0\u03fc\0\u04c8\0\u0264\0\u0352\0\u0154";
+    "\0\u0110\0\u0132\0\u0110\0\u0154\0\u0176\0\u0198\0\42\0\u01ba"+
+    "\0\42\0\u01ba\0\42\0\42\0\u01ba\0\42\0\42\0\42"+
+    "\0\u01dc\0\42\0\u01fe\0\u0220\0\u0242\0\u0264\0\u0286\0\u02a8"+
+    "\0\u02ca\0\u02ec\0\u0264\0\u030e\0\u0330\0\u0352\0\u0374\0\u0264"+
+    "\0\u0396\0\u03b8\0\u03da\0\u03fc\0\u041e\0\u041e\0\u0264\0\u0440"+
+    "\0\u0264\0\u0462\0\u0352\0\u0352\0\u0374\0\u03b8\0\u0484\0\u04a6"+
+    "\0\u0286\0\u03fc\0\u0264";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[55];
+    int [] result = new int[59];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -117,40 +119,39 @@ public class Lexer {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11"+
-    "\3\3\1\12\1\13\1\14\1\0\1\15\1\16\1\2"+
-    "\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26"+
-    "\2\2\1\27\1\30\1\31\1\32\1\33\1\2\21\0"+
-    "\1\34\21\0\2\35\2\0\1\35\1\0\4\35\6\0"+
-    "\1\34\22\0\1\36\16\0\1\34\23\0\1\14\2\0"+
-    "\1\14\6\0\1\14\3\0\1\34\24\0\3\37\12\0"+
-    "\1\34\14\0\2\37\3\0\2\35\1\0\1\37\1\40"+
-    "\1\37\4\35\6\0\1\34\14\0\2\37\5\0\1\14"+
-    "\2\37\1\41\6\0\1\14\3\0\1\34\14\0\2\37"+
-    "\3\0\2\35\2\0\1\35\1\0\1\35\1\42\2\35"+
-    "\6\0\1\34\33\0\1\43\5\0\1\34\65\0\1\14"+
-    "\2\0\1\14\6\0\1\14\45\0\1\34\10\0\1\44"+
-    "\12\0\1\45\2\0\1\45\6\0\1\45\3\0\1\34"+
-    "\11\0\1\46\6\0\4\47\3\50\12\47\1\51\14\47"+
-    "\1\37\1\50\2\47\4\52\3\53\12\52\1\54\14\52"+
-    "\1\53\1\37\2\52\21\0\1\34\13\0\1\55\4\0"+
-    "\14\56\3\0\23\56\1\0\2\35\2\0\1\35\1\0"+
-    "\4\35\31\0\1\36\43\0\3\37\27\0\2\37\3\0"+
-    "\2\35\1\0\1\37\1\40\1\37\4\35\23\0\2\37"+
-    "\5\0\1\14\2\37\1\41\6\0\1\14\20\0\2\37"+
-    "\3\0\2\35\2\0\1\35\1\0\2\35\1\57\1\35"+
-    "\27\0\14\43\3\0\23\43\14\44\1\0\1\44\1\0"+
-    "\13\44\1\60\7\44\3\0\1\45\2\0\1\45\6\0"+
-    "\1\45\15\0\1\46\6\0\36\47\1\61\7\47\3\50"+
-    "\27\47\1\37\1\50\2\47\14\62\3\47\17\62\1\56"+
-    "\3\62\37\52\1\61\6\52\3\53\27\52\1\53\1\37"+
-    "\2\52\14\63\3\52\20\63\1\56\2\63\2\0\1\64"+
-    "\40\0\2\35\2\0\1\35\1\0\3\35\1\65\27\0"+
-    "\14\44\1\0\1\44\1\0\13\44\1\60\1\66\6\44"+
-    "\2\0\1\64\36\0\1\67";
+    "\1\2\1\3\1\4\1\5\1\6\1\7\3\3\1\10"+
+    "\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20"+
+    "\1\2\1\21\1\22\1\23\1\5\1\24\1\25\1\26"+
+    "\1\27\1\30\1\31\2\2\1\32\1\33\1\34\22\0"+
+    "\1\35\2\0\2\36\14\0\2\37\2\0\4\37\4\0"+
+    "\1\37\4\0\1\35\2\0\2\36\15\0\1\40\17\0"+
+    "\1\35\2\0\2\36\16\0\1\41\7\0\1\41\6\0"+
+    "\1\35\2\0\1\36\1\41\17\0\1\42\10\0\3\43"+
+    "\2\0\1\35\2\0\2\36\14\0\2\37\2\0\1\37"+
+    "\1\44\2\37\4\0\1\37\4\0\1\35\2\0\2\36"+
+    "\24\0\1\45\10\0\1\35\2\0\2\36\40\0\2\36"+
+    "\16\0\1\41\7\0\1\41\11\0\1\36\1\41\14\0"+
+    "\2\37\2\0\4\37\4\0\1\37\4\0\1\35\3\0"+
+    "\1\36\13\0\4\46\1\47\11\46\1\50\3\46\1\51"+
+    "\17\46\17\52\1\50\2\52\1\53\17\52\22\0\1\35"+
+    "\41\0\1\35\2\0\2\36\6\0\1\54\7\0\1\55"+
+    "\7\0\1\55\6\0\1\35\2\0\1\36\1\56\7\0"+
+    "\1\57\25\0\1\35\15\0\1\60\1\0\12\61\3\0"+
+    "\25\61\43\0\2\37\2\0\4\37\4\0\1\37\26\0"+
+    "\1\40\42\0\1\41\7\0\1\41\12\0\1\41\17\0"+
+    "\1\42\10\0\3\43\23\0\2\37\2\0\2\37\1\62"+
+    "\1\37\4\0\1\37\24\0\12\45\3\0\25\45\4\46"+
+    "\1\47\11\46\1\50\27\46\1\47\11\46\1\63\23\46"+
+    "\4\64\1\65\5\64\3\46\1\64\1\61\23\64\17\52"+
+    "\1\50\22\52\12\66\3\52\2\66\1\61\22\66\13\54"+
+    "\2\0\20\54\1\67\4\54\3\0\1\55\7\0\1\55"+
+    "\12\0\1\55\7\0\1\57\5\0\1\70\40\0\2\37"+
+    "\2\0\3\37\1\71\4\0\1\37\24\0\13\54\2\0"+
+    "\20\54\1\67\1\72\3\54\2\0\1\70\21\0\1\73"+
+    "\15\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[1258];
+    int [] result = new int[1224];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -188,12 +189,12 @@ public class Lexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\11\1\1\11\20\1\1\0\7\1\2\0\1\11"+
-    "\1\0\1\1\2\0\1\1\2\0\1\11\1\1\1\0"+
-    "\1\11\2\1\1\0\2\1\1\11";
+    "\1\0\11\1\1\0\21\1\1\0\1\11\3\1\1\0"+
+    "\1\11\2\1\2\0\1\11\5\0\1\1\1\11\1\0"+
+    "\1\11\5\1\2\0\2\1\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[55];
+    int [] result = new int[59];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -647,87 +648,91 @@ public class Lexer {
           case 1: 
             { System.out.println("error aqui"); GraficadorErrores.errores += "<tr><td>" + GraficadorErrores.contador + "</td><td>Lexico</td><td>Se encontro un error en los caracteres de entrada (caracter desconocido)</td><td>" + yyline + "</td><td>" + yycolumn + "</td></tr>\n";GraficadorErrores.contador++;
             }
-          case 22: break;
+          case 23: break;
           case 2: 
             { lexeme=yytext(); return Identificador;
             }
-          case 23: break;
+          case 24: break;
           case 3: 
             { lexeme=yytext(); return Numero;
             }
-          case 24: break;
+          case 25: break;
           case 4: 
             { /*Ignore*/
             }
-          case 25: break;
-          case 5: 
-            { lexeme=yytext(); return Especial;
-            }
           case 26: break;
-          case 6: 
+          case 5: 
             { lexeme=yytext(); return Linea;
             }
           case 27: break;
-          case 7: 
+          case 6: 
             { lexeme=yytext(); return Llave_Abre;
             }
           case 28: break;
-          case 8: 
+          case 7: 
             { lexeme=yytext(); return Llave_Cierra;
             }
           case 29: break;
-          case 9: 
+          case 8: 
             { lexeme=yytext(); return Punto;
             }
           case 30: break;
-          case 10: 
+          case 9: 
             { lexeme=yytext(); return Punto_Coma;
             }
           case 31: break;
-          case 11: 
+          case 10: 
             { lexeme=yytext(); return Dos_Puntos;
             }
           case 32: break;
-          case 12: 
+          case 11: 
             { lexeme=yytext(); return Or;
             }
           case 33: break;
-          case 13: 
+          case 12: 
             { lexeme=yytext(); return Asterizco;
             }
           case 34: break;
-          case 14: 
+          case 13: 
             { lexeme=yytext(); return Suma;
             }
           case 35: break;
-          case 15: 
+          case 14: 
             { lexeme=yytext(); return Interrogacion;
             }
           case 36: break;
-          case 16: 
+          case 15: 
             { lexeme=yytext(); return Porcentaje;
             }
           case 37: break;
-          case 17: 
-            { lexeme=yytext(); return Asignacion;
+          case 16: 
+            { lexeme=yytext(); return Coma;
             }
           case 38: break;
-          case 18: 
-            { lexeme=yytext(); return Guion;
+          case 17: 
+            { lexeme=yytext(); return Especial;
             }
           case 39: break;
-          case 19: 
+          case 18: 
             { lexeme=yytext(); return Cadena;
             }
           case 40: break;
-          case 20: 
-            { lexeme=yytext(); return CONJ;
+          case 19: 
+            { lexeme=yytext(); return Asignacion;
             }
           case 41: break;
-          case 21: 
-            { /*ignore*/
+          case 20: 
+            { lexeme=yytext(); return Guion;
             }
           case 42: break;
+          case 21: 
+            { lexeme=yytext(); return CONJ;
+            }
+          case 43: break;
+          case 22: 
+            { /*ignore*/
+            }
+          case 44: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

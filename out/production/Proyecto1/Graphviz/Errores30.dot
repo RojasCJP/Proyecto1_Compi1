@@ -1,0 +1,13 @@
+digraph {
+
+  tbl [
+
+    shape=plaintext
+    label=<
+      <table border='0' cellborder='1' color='blue' cellspacing='0'>
+        <tr><td>#</td><td>Tipo de error</td><td>Descripcion</td><td>Linea</td><td>Columna</td></tr><tr><td>12</td><td>Sintactico</td><td>El token encontrado no concuerda con lo esperado</td><td>15</td><td>74</td></tr>
+</table>
+
+    >];
+
+}
