@@ -15,7 +15,6 @@ public class Conjuntos {
         this.conjuntoNombre = conjuntoNombre;
         conjuntosBusquda.put(this.conjuntoNombre, separador());
         Map conjuntosLocal = conjuntosBusquda;
-        System.out.println("solo pal breakpoint xd");
     }
 
     private ArrayList separador() {

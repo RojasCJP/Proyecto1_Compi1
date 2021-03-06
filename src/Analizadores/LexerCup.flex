@@ -32,7 +32,7 @@ CONJ {return new Symbol(sym.CONJ, yycolumn, yyline, yytext());}
 ("}") {return new Symbol(sym.Llave_Cierra, yycolumn, yyline, yytext());}
 ((.)"~"(.)) {return new Symbol(sym.Guion, yycolumn, yyline, yytext());}
 (".") {return new Symbol(sym.Punto, yycolumn, yyline, yytext());}
-([^("\'"|"\""|"}"|"n")](";")) {return new Symbol(sym.Coma, yycolumn, yyline, yytext());}
+([^("\'"|"\""|"}"|"n"|" ")](";")) {return new Symbol(sym.Coma, yycolumn, yyline, yytext());}
 ([^("\'"|"\""|"}")](",")) {return new Symbol(sym.Coma, yycolumn, yyline, yytext());}
 (";") {return new Symbol(sym.Punto_Coma, yycolumn, yyline, yytext());}
 (":") {return new Symbol(sym.Dos_Puntos, yycolumn, yyline, yytext());}
@@ -40,7 +40,7 @@ CONJ {return new Symbol(sym.CONJ, yycolumn, yyline, yytext());}
 ("*") {return new Symbol(sym.Asterizco, yycolumn, yyline, yytext());}
 ("+") {return new Symbol(sym.Suma, yycolumn, yyline, yytext());}
 ("?") {return new Symbol(sym.Interrogacion, yycolumn, yyline, yytext());}
-("<!"(.|"\n")*"!>") {/*ignore*/}
+("<!"([^"!>"]|"\\\"")*"!>") {/*ignore*/}
 ("%") {return new Symbol(sym.Porcentaje, yycolumn, yyline, yytext());}
 ("-"{espacio}*">") {return new Symbol(sym.Asignacion, yycolumn, yyline, yytext());}
 ("'"[^\']*"'") {return new Symbol(sym.Cadena, yycolumn, yyline, yytext());}

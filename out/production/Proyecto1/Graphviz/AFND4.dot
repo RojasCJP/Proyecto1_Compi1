@@ -1,0 +1,10 @@
+digraph {
+  rankdir = LR; 0->1 [label="{digito}"];
+ 2->3 [label="\".\""];
+ 4->5 [label="\"@\""];
+ 6->4 [label="ε"];
+ 5->7 [label="ε"];
+ 5->4 [label="ε"];
+ 3->6 [label="ε"];
+ 1->2 [label="ε"];
+}

@@ -123,7 +123,7 @@ public class AnalizadorRegex {
                                                     trigger = true;
                                                 }
 
-                                            } else if (siguiente.charAt(0) == 'n' || siguiente.charAt(0) == '\'' || siguiente.charAt(0) == '"') {
+                                            } else if ((siguiente.charAt(0) == 'n' && siguiente.length() == 1) || siguiente.charAt(0) == '\'' || siguiente.charAt(0) == '"') {
                                                 if (siguiente.charAt(0) != caracterEvaluar) {
                                                     cadenaValida = false;
                                                 } else {

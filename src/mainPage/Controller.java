@@ -387,12 +387,6 @@ public class Controller {
         try {
             sintax.parse();
             resultado += "ANALISIS SINTACTICO REALIZADO CORRECTAMENTE";
-        } catch (Exception e) {
-            Symbol syms = sintax.getS();
-            resultado += "ERROR DE SINTAXIS EN LA LINEA: " + (syms.right + 1) + " COLUMNA: " + (syms.left + 1) + ", TEXTO: \"" + syms.value + "\"";
-            GraficadorErrores.errores += "<tr><td>" + GraficadorErrores.contador + "</td><td>Sintactico</td><td>El caracter " + syms.value + " no se esperaba</td><td>" + syms.right + "</td><td>" + syms.left + "</td></tr>\n";
-            GraficadorErrores.contador++;
-        }
             expresionesRegulares = sintax.meVaAServir;
             for (int i = 0; i < expresionesRegulares.size(); i++) {
                 Metodo metodo      = new Metodo();
@@ -403,6 +397,12 @@ public class Controller {
                 AnalizadorRegex analizadorRegex = new AnalizadorRegex();
                 analizadorRegex.evaluarExpresiones();
             }
+        } catch (Exception e) {
+            Symbol syms = sintax.getS();
+            resultado += "ERROR DE SINTAXIS EN LA LINEA: " + (syms.right + 1) + " COLUMNA: " + (syms.left + 1) + ", TEXTO: \"" + syms.value + "\"";
+            GraficadorErrores.errores += "<tr><td>" + GraficadorErrores.contador + "</td><td>Sintactico</td><td>El caracter " + syms.value + " no se esperaba</td><td>" + syms.right + "</td><td>" + syms.left + "</td></tr>\n";
+            GraficadorErrores.contador++;
+        }
         Salida.setText(resultado);
     }
 

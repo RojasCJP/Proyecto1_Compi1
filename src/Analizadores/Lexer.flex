@@ -26,7 +26,7 @@ especial=[\\]+
 ("}") {lexeme=yytext(); return Llave_Cierra;}
 ((.)"~"(.)) {lexeme=yytext(); return Guion;}
 (".") {lexeme=yytext(); return Punto;}
-([^("\'"|"\""|"}"|"n")](";")) {lexeme=yytext(); return Coma;}
+([^("\'"|"\""|"}"|"n"|" ")](";")) {lexeme=yytext(); return Coma;}
 ([^("\'"|"\""|"}")](",")) {lexeme=yytext(); return Coma;}
 (";") {lexeme=yytext(); return Punto_Coma;}
 (":") {lexeme=yytext(); return Dos_Puntos;}
@@ -34,7 +34,7 @@ especial=[\\]+
 ("*") {lexeme=yytext(); return Asterizco;}
 ("+") {lexeme=yytext(); return Suma;}
 ("?") {lexeme=yytext(); return Interrogacion;}
-("<!"(.|"\n")*"!>") {/*ignore*/}
+("<!"([^"!>"]|"\\\"")*"!>") {/*ignore*/}
 ("%") {lexeme=yytext(); return Porcentaje;}
 ("-"{espacio}*">") {lexeme=yytext(); return Asignacion;}
 ("'"[^\']*"'") {lexeme=yytext(); return Cadena;}

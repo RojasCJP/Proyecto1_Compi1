@@ -1,21 +1,19 @@
 digraph structs {
-    node [shape=record];ArbolNodoMetodo76d655bd[label="[1]|{false|{letra}|1}|[1]"];
-ArbolNodoMetodo66868aa4[label="[2]|{false|{_}|2}|[2]"];
-ArbolNodoMetodo24fb4098[label="[3]|{false|{letra}|3}|[3]"];
-ArbolNodoMetodo61727176[label="[4]|{false|{digito}|4}|[4]"];
-ArbolNodoMetodo25cdab58[label="[3, 4]|{false|{\|}|0}|[3, 4]"];
-ArbolNodoMetodo25cdab58 -> ArbolNodoMetodo24fb4098;
-ArbolNodoMetodo25cdab58 -> ArbolNodoMetodo61727176;
-ArbolNodoMetodo774cd6ef[label="[2, 3, 4]|{false|{\|}|0}|[2, 3, 4]"];
-ArbolNodoMetodo774cd6ef -> ArbolNodoMetodo66868aa4;
-ArbolNodoMetodo774cd6ef -> ArbolNodoMetodo25cdab58;
-ArbolNodoMetodo94da71e[label="[2, 3, 4]|{true|{*}|0}|[2, 3, 4]"];
-ArbolNodoMetodo94da71e -> ArbolNodoMetodo774cd6ef;
-ArbolNodoMetodo7bc68e80[label="[1]|{false|{.}|0}|[1, 2, 3, 4]"];
-ArbolNodoMetodo7bc68e80 -> ArbolNodoMetodo76d655bd;
-ArbolNodoMetodo7bc68e80 -> ArbolNodoMetodo94da71e;
-ArbolNodoMetodo33196dcb[label="[5]|{false|{#}|5}|[5]"];
-ArbolNodoMetodo22f32ee9[label="[1]|{false|{.}|0}|[5]"];
-ArbolNodoMetodo22f32ee9 -> ArbolNodoMetodo7bc68e80;
-ArbolNodoMetodo22f32ee9 -> ArbolNodoMetodo33196dcb;
+    node [shape=record];ArbolNodoMetodo684b0677[label="[1]|{false|{simbols}|1}|[1]"];
+ArbolNodoMetodo6a1d35c1[label="[1]|{false|{+}|0}|[1]"];
+ArbolNodoMetodo6a1d35c1 -> ArbolNodoMetodo684b0677;
+ArbolNodoMetodo4e1d776e[label="[2]|{false|{minus}|2}|[2]"];
+ArbolNodoMetodo2d981c35[label="[3]|{false|{mayus}|3}|[3]"];
+ArbolNodoMetodo1dd0cf4f[label="[2, 3]|{false|{\|}|0}|[2, 3]"];
+ArbolNodoMetodo1dd0cf4f -> ArbolNodoMetodo4e1d776e;
+ArbolNodoMetodo1dd0cf4f -> ArbolNodoMetodo2d981c35;
+ArbolNodoMetodo1e605209[label="[2, 3]|{false|{+}|0}|[2, 3]"];
+ArbolNodoMetodo1e605209 -> ArbolNodoMetodo1dd0cf4f;
+ArbolNodoMetodo3be3e0ac[label="[1]|{false|{.}|0}|[2, 3]"];
+ArbolNodoMetodo3be3e0ac -> ArbolNodoMetodo6a1d35c1;
+ArbolNodoMetodo3be3e0ac -> ArbolNodoMetodo1e605209;
+ArbolNodoMetodo56f73a51[label="[4]|{false|{#}|4}|[4]"];
+ArbolNodoMetodo4d463d77[label="[1]|{false|{.}|0}|[4]"];
+ArbolNodoMetodo4d463d77 -> ArbolNodoMetodo3be3e0ac;
+ArbolNodoMetodo4d463d77 -> ArbolNodoMetodo56f73a51;
 }
