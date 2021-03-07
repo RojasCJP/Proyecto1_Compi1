@@ -13,19 +13,18 @@ import java_cup.runtime.Symbol;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 
@@ -50,6 +49,7 @@ public class Controller {
     private        File        carpetaImagenesAcutales;
     private        File[]      listaImagenes;
     private        int         contadorImagen = 0;
+    private        File        documentoEntrada;
 
     @FXML
     public void imagenesAFD(ActionEvent event) {
@@ -144,7 +144,7 @@ public class Controller {
         Image image = new Image(listaImagenes[contadorImagen].toURI().toString());
         imagenes.setImage(image);
         if (contadorImagen <= 0) {
-            contadorImagen = listaImagenes.length-1;
+            contadorImagen = listaImagenes.length - 1;
         } else {
             contadorImagen--;
         }
@@ -154,7 +154,7 @@ public class Controller {
     public void imagenSiguiente(MouseEvent event) {
         Image image = new Image(listaImagenes[contadorImagen].toURI().toString());
         imagenes.setImage(image);
-        if (contadorImagen >= listaImagenes.length-1) {
+        if (contadorImagen >= listaImagenes.length - 1) {
             contadorImagen = 0;
         } else {
             contadorImagen++;
@@ -172,6 +172,7 @@ public class Controller {
             while (fileScanner.hasNextLine()) {
                 data += fileScanner.nextLine() + "\n";
             }
+            documentoEntrada = selectedFile;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -181,12 +182,49 @@ public class Controller {
 
     @FXML
     private void guardarMethod(ActionEvent event) {
-        //todo tego que hacer el metodo para ver si ya existia el archivo y guardarlo
+        FileWriter  fichero  = null;
+        PrintWriter pw       = null;
+        int         contador = 0;
+        File        dot      = documentoEntrada;
+        try {
+            fichero = new FileWriter(dot.getAbsolutePath());
+            pw = new PrintWriter(fichero);
+            pw.println(Entrada.getText());
+            fichero.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void guardarComoMethod(ActionEvent event) {
-        //todo tengo hacer que pueda guardar el archivo en algun folder
+        FileWriter       fichero          = null;
+        PrintWriter      pw               = null;
+        String           nombreArchivo    = "";
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Guardar Como");
+        File selectedDirectory = directoryChooser.showDialog(this.stage);
+        File dot               = documentoEntrada;
+        if (selectedDirectory != null) {
+            TextInputDialog dialog = new TextInputDialog("Nombre");
+            dialog.setTitle("Guardar como");
+            dialog.setHeaderText("Como quieres que se llame tu archivo");
+            dialog.setContentText("Nombre de tu archivo:");
+
+            Optional<String> result = dialog.showAndWait();
+            if (result.isPresent()) {
+                nombreArchivo = result.get();
+                dot = new File(selectedDirectory.getAbsolutePath() + "\\" + nombreArchivo);
+            }
+        }
+        try {
+            fichero = new FileWriter(dot.getAbsolutePath());
+            pw = new PrintWriter(fichero);
+            pw.println(Entrada.getText());
+            fichero.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
